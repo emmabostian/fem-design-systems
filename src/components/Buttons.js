@@ -49,7 +49,17 @@ const BUTTON_MODIFIERS = {
   `
 };
 
-const Button = styled.button`
+const BUTTON_ICON_MODIFIERS = {
+  small: () => `
+    width: ${typeScale.helperText}
+  `,
+  large: () => `
+  width: ${typeScale.header5}
+
+  `
+};
+
+export const Button = styled.button`
   padding: 8px 12px;
   font-size: typeScale.paragraph;
   border-radius: 2px;
@@ -112,5 +122,34 @@ export const TertiaryButton = styled(Button)`
   }
   ${applyStyleModifiers(BUTTON_MODIFIERS)};
 `;
+
+const ButtonIcon = styled.img`
+  display: inline-block;
+  margin-right: 8px;
+  width: ${typeScale.paragraph};
+`;
+
+export const PrimaryButtonIcon = styled(ButtonIcon)`
+  fill: ${props => props.theme.textColorOnPrimary};
+  ${applyStyleModifiers(BUTTON_ICON_MODIFIERS)};
+`;
+
+export const SecondaryButtonIcon = styled(ButtonIcon)`
+  path {
+    stroke: red;
+  }
+  ${applyStyleModifiers(BUTTON_ICON_MODIFIERS)};
+`;
+
+export const TertiaryButtonIcon = styled(ButtonIcon)`
+  path {
+    fill: ${props => props.theme.primaryColor};
+  }
+  ${applyStyleModifiers(BUTTON_ICON_MODIFIERS)};
+`;
+
+PrimaryButton.Icon = PrimaryButtonIcon;
+SecondaryButton.Icon = SecondaryButtonIcon;
+TertiaryButton.Icon = TertiaryButtonIcon;
 
 export default PrimaryButton;

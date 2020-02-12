@@ -7,6 +7,7 @@ import PrimaryButton, {
 import { ThemeProvider } from "styled-components";
 import { defaultTheme, darkTheme } from "./utils";
 import GlobalStyle from "./utils/Global";
+import { Save } from "./icons";
 
 const App = () => {
   const [useDarkTheme, setUseDarkTheme] = useState(false);
@@ -26,10 +27,14 @@ const App = () => {
           justifyContent: "space-around"
         }}
       >
-        <PrimaryButton modifiers={["small", "success"]}>
+        <PrimaryButton>
+          <Save />
           Hello World
         </PrimaryButton>
-        <SecondaryButton modifiers={["large"]}>Goodbye World</SecondaryButton>
+        <SecondaryButton modifiers={["large"]}>
+          <Save modifiers={["inverted"]} />
+          Goodbye World
+        </SecondaryButton>
         <TertiaryButton>Hey</TertiaryButton>
         <GlobalStyle />
       </div>

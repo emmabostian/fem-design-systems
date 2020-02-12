@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import PrimaryButton, {
-  SecondaryButton,
-  TertiaryButton
-} from "./components/Buttons";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme, darkTheme } from "./utils";
 import GlobalStyle from "./utils/Global";
-import { Save } from "./icons";
+import { SignUpModal } from "./components";
 
 const App = () => {
   const [useDarkTheme, setUseDarkTheme] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   return (
     <ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
       <button onClick={() => setUseDarkTheme(true)}>Dark theme</button>
       <button onClick={() => setUseDarkTheme(false)}>Default theme</button>
+      <button onClick={() => setShowModal(!showModal)}>Show modal</button>
       <div
         style={{
           background: useDarkTheme
@@ -27,15 +25,7 @@ const App = () => {
           justifyContent: "space-around"
         }}
       >
-        <PrimaryButton>
-          <Save />
-          Hello World
-        </PrimaryButton>
-        <SecondaryButton modifiers={["large"]}>
-          <Save modifiers={["inverted"]} />
-          Goodbye World
-        </SecondaryButton>
-        <TertiaryButton>Hey</TertiaryButton>
+        <SignUpModal showModal={showModal} setShowModal={setShowModal} />
         <GlobalStyle />
       </div>
     </ThemeProvider>

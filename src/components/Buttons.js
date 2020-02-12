@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
-import { typeScale } from "../utils";
+import { helperText, header5, paragraph } from "../utils";
 
 const BUTTON_MODIFIERS = {
   small: () => `
-    font-size: ${typeScale.helperText};
+    ${helperText}
     padding: 8px 8px;
   `,
   large: () => `
-    font-size: ${typeScale.header5};
+    ${header5}
     padding: 16px 24px;
   `,
   warning: () => `
@@ -49,23 +49,12 @@ const BUTTON_MODIFIERS = {
   `
 };
 
-const BUTTON_ICON_MODIFIERS = {
-  small: () => `
-    width: ${typeScale.helperText}
-  `,
-  large: () => `
-  width: ${typeScale.header5}
-
-  `
-};
-
 export const Button = styled.button`
   padding: 8px 12px;
-  font-size: typeScale.paragraph;
   border-radius: 2px;
   min-width: 100px;
   cursor: pointer;
-  font-family: ${props => props.theme.primaryFont};
+  ${paragraph}
   transition: background-color 0.2s linear, color 0.2s linear,
     border 0.2s linear;
 
@@ -84,7 +73,7 @@ export const Button = styled.button`
   }
 `;
 
-const PrimaryButton = styled(Button)`
+export const PrimaryButton = styled(Button)`
   background-color: ${props => props.theme.primaryColor};
   color: ${props => props.theme.textColorOnPrimary};
   border: 2px solid transparent;
@@ -122,34 +111,3 @@ export const TertiaryButton = styled(Button)`
   }
   ${applyStyleModifiers(BUTTON_MODIFIERS)};
 `;
-
-const ButtonIcon = styled.img`
-  display: inline-block;
-  margin-right: 8px;
-  width: ${typeScale.paragraph};
-`;
-
-export const PrimaryButtonIcon = styled(ButtonIcon)`
-  fill: ${props => props.theme.textColorOnPrimary};
-  ${applyStyleModifiers(BUTTON_ICON_MODIFIERS)};
-`;
-
-export const SecondaryButtonIcon = styled(ButtonIcon)`
-  path {
-    stroke: red;
-  }
-  ${applyStyleModifiers(BUTTON_ICON_MODIFIERS)};
-`;
-
-export const TertiaryButtonIcon = styled(ButtonIcon)`
-  path {
-    fill: ${props => props.theme.primaryColor};
-  }
-  ${applyStyleModifiers(BUTTON_ICON_MODIFIERS)};
-`;
-
-PrimaryButton.Icon = PrimaryButtonIcon;
-SecondaryButton.Icon = SecondaryButtonIcon;
-TertiaryButton.Icon = TertiaryButtonIcon;
-
-export default PrimaryButton;

@@ -10,12 +10,12 @@ Some of the topics and technologies we'll cover include:
 
 - [Foundations of design systems]('/foundations-of-design-systems')
 - [Foundations of design]('/foundations-of-design')
-- Design prototyping tools (Figma)
-- Creating extensible React components with styled components
-- Animating components with React Spring
-- Testing components with Jest & Enzyme
+- [Designing with Figma]('/designing-with-figma')
+- [Developing styled components]('/developing-styled-components')
+- [Animating components with react-spring]('/animating-components')
+- [Documenting components with Storybook]('/documenting-components-with-storybook')
 - Documenting components with Storybook
-- Publishing your component library to NPM
+- [Tooling & resources]('/tooling-and-resources')
 
 There are a few things you should have prior to taking this course:
 

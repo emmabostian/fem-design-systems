@@ -128,11 +128,15 @@ Finally, as it's being built by the teams using it, progress doesn't stop if one
 
 In this team model we can see that there is no centralized or core team building the system; the teams which consume the system are simultaneously contributing to the system.
 
+![Distributed model](images/distributed-model.png)
+
 ### Hybrid Model
 
 Lastly is the hybrid model, which combines the centralized and distributed team models.
 
 This method is the most effective as decisions are made quickly and development of the design system is streamlined due to community contribution.
+
+![Hybrid model](images/hybrid-model.png)
 
 ## Who Are Design Systems For?
 

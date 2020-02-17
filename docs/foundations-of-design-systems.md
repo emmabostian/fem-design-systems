@@ -2,17 +2,19 @@
 
 The internet was not originally intended to host large-scale social and enterprise applications; it was built as a method for sharing data all across the world.
 
-Yet much of the terminology we've coined in regards to web development has its roots in printed books. Webpages, bookmarking, and pagination all elude to a time when printed media was king.
+Yet much of the terminology we've coined in regards to web development has its roots in printed books. Webpages, bookmarking, and pagination all allude to a time when printed media was king.
 
 This era is long gone.
 
 Digital media has taken over as the primary resource for sharing and digesting content.
 
-We don't develop websites as full pages anymore, which poses a problem. When we associate websites with the concept of pages, subconsciously we throw re-usability out the window; nothing about the word page indicates re-usability. And when we don't re-use our code, consistency, accessibility, and development speed suffer.
+We don't develop websites as full pages anymore, which poses a problem. When we associate websites with the concept of pages, subconsciously we throw re-usability out the window; nothing about the word page indicates re-usability. And when we don't re-use our code consistency, accessibility, and development speed suffer.
 
 Instead of thinking in terms of pages, we should be thinking in terms of components. Components allow us to maintain consistent user interfaces which are accessible by nature. And design systems are the way in which we can create these sets of reusable patterns and components.
 
-Design systems allow us to create a cohesive experience throughout every leg of the user's journey.
+Design systems allow us to create a cohesive experience throughout every leg of a user's journey.
+
+## What Is A Design System?
 
 There is no industry definition for a design system, which can make it a bit tricky to understand.
 
@@ -74,15 +76,13 @@ But while all of these benefits sound great, there are some drawbacks as well.
 
 ### Time
 
-We've all heard the saying that "Rome wasn't built in a day" and neither will your design system.
+We've all heard the saying that "Rome wasn't built in a day" and your design system won't be either.
 
 Design systems take time to build. We're not talking a month or two. A robust design system built from the ground up can take many months to several years to be stable. This is all dependent on your team structure.
 
 ### Evolution
 
-Design systems take time to build. We're not talking a month or two. A robust design system built from the ground up can take many months to several years to be stable. This is all dependent on your team structure.
-
-And a design system is never complete.
+A design system is never complete. It isn't a project with a finite end date; it's a product serving products and it will evolve over time.
 
 ### Maintenance
 
@@ -113,6 +113,8 @@ They will
 - Manage & create the UI kit, component library, and style guide
 
 The team structure is cross-disciplined. You'll need members from design, engineering, and product in order to build a sustainable and scalable system.
+
+![Centralized model](images/centralized-model.png)
 
 ### Distributed Model
 

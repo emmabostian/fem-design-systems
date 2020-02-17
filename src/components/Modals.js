@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { paragraph, header3 } from "../utils";
+import { typeScale } from "../utils";
 import { PrimaryButton } from "./Buttons";
 import { SignUp, CloseIcon } from "../assets";
 import { useSpring, animated, config } from "react-spring";
@@ -26,11 +26,11 @@ const ModalWrapper = styled.div`
 `;
 
 const SignUpHeader = styled.h3`
-  ${header3}
+  font-size: ${typeScale.header3};
 `;
 
 const SignUpText = styled.p`
-  ${paragraph}
+font-size: ${typeScale.paragraph}
   max-width: 70%;
   text-align: center;
 `;
@@ -38,7 +38,7 @@ const SignUpText = styled.p`
 export const SignUpModal = ({ showModal, setShowModal }) => {
   const animation = useSpring({
     opacity: showModal ? 1 : 0,
-    transform: showModal ? `translateY(0)` : `translateY(-100%)`,
+    transform: showModal ? `translateY(0)` : `translateY(-200%)`,
     config: config.slow
   });
   return (

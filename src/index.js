@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme, darkTheme } from "./utils";
 import GlobalStyle from "./utils/Global";
-import { SignUpModal } from "./components";
+import { SignUpModal, PrimaryButton } from "./components";
 
 const App = () => {
   const [useDarkTheme, setUseDarkTheme] = useState(false);
@@ -26,6 +26,7 @@ const App = () => {
         }}
       >
         <SignUpModal showModal={showModal} setShowModal={setShowModal} />
+
         <GlobalStyle />
       </div>
     </ThemeProvider>

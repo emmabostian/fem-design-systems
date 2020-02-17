@@ -1,50 +1,50 @@
 import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
-import { helperText, header5, paragraph } from "../utils";
+import { typeScale, primaryFont } from "../utils";
 
-const BUTTON_MODIFIERS = {
+export const BUTTON_MODIFIERS = {
   small: () => `
-    ${helperText}
-    padding: 8px 8px;
+  padding: 8px 8px;
+  font-size: ${typeScale.helperText};
   `,
   large: () => `
-    ${header5}
-    padding: 16px 24px;
+  padding: 16px 24px;
+  font-size: ${typeScale.header5};
   `,
-  warning: () => `
-    background-color: ${props => props.theme.warningColor};
-    color: ${props => props.theme.textColorInverted};
+  warning: ({ theme }) => `
+    background-color: ${theme.warningColor};
+    color: ${theme.textColorInverted};
 
     &:hover, &:focus {
-      background-color: ${props => props.theme.warningColorHover};
+      background-color: ${theme.warningColorHover};
     }
 
     &:active {
-      background-color: ${props => props.theme.warningColorActive};
+      background-color: ${theme.warningColorActive};
     }
   `,
-  error: () => `
-  background-color: ${props => props.theme.errorColor};
-  color: ${props => props.theme.textColorInverted};
+  error: ({ theme }) => `
+  background-color: ${theme.errorColor};
+  color: ${theme.textColorInverted};
 
   &:hover {
-    background-color: ${props => props.theme.errorColorHover};
+    background-color: ${theme.errorColorHover};
   }
 
   &:active {
-    background-color: ${props => props.theme.errorColorActive};
+    background-color: ${theme.errorColorActive};
   }
   `,
-  success: () => `
-  background-color: ${props => props.theme.successColor};
-  color: ${props => props.theme.textColorInverted};
+  success: ({ theme }) => `
+  background-color: ${theme.successColor};
+  color: ${theme.textColorInverted};
 
   &:hover {
-    background-color: ${props => props.theme.successColorHover};
+    background-color: ${theme.successColorHover};
   }
 
   &:active {
-    background-color: ${props => props.theme.successColorActive};
+    background-color: ${theme.successColorActive};
   }
   `
 };
@@ -54,7 +54,8 @@ export const Button = styled.button`
   border-radius: 2px;
   min-width: 100px;
   cursor: pointer;
-  ${paragraph}
+  font-family: ${primaryFont};
+  font-size: ${typeScale.paragraph};
   transition: background-color 0.2s linear, color 0.2s linear,
     border 0.2s linear;
 

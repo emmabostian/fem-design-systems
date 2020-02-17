@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, select, boolean } from "@storybook/addon-knobs";
+import { withA11y } from "@storybook/addon-a11y";
 import {
   PrimaryButton,
   SecondaryButton,
@@ -18,7 +19,8 @@ export default {
   title: "Buttons",
   decorators: [
     storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>,
-    withKnobs
+    withKnobs,
+    withA11y
   ]
 };
 

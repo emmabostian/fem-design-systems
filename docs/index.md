@@ -8,7 +8,7 @@ We will be coding in React, so it's recommended you have React knowledge prior t
 
 Some of the topics and technologies we'll cover include:
 
-- Foundations of design systems
+- [Foundations of design systems]('foundations-of-design-systems.md')
 - Foundations of design (i.e. color theory, typography)
 - Design prototyping tools (Figma)
 - Creating extensible React components with styled components

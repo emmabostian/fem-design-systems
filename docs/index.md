@@ -8,13 +8,12 @@ We will be coding in React, so it's recommended you have React knowledge prior t
 
 Some of the topics and technologies we'll cover include:
 
-- [Foundations of design systems](/foundations-of-design-systems)
-- [Foundations of design](/foundations-of-design)
+- [Foundations of design systems](./foundations-of-design-systems)
+- [Foundations of design](./foundations-of-design)
 - [Designing with Figma](/designing-with-figma)
 - [Developing styled components](/developing-styled-components)
 - [Animating components with react-spring](/animating-components)
 - [Documenting components with Storybook](/documenting-components-with-storybook)
-- Documenting components with Storybook
 - [Tooling & resources](/tooling-and-resources)
 
 There are a few things you should have prior to taking this course:

@@ -189,7 +189,38 @@ const Modal = () => {
 export default Modal;
 ```
 
-Now, it's your turn. Head over to [this CodeSandbox](https://codesandbox.io/s/reverent-currying-fbhix?fontsize=14&hidenavigation=1&theme=dark) and complete the activity in the `Toast.js` file.
+Now, it's your turn. Head over to [this CodeSandbox](https://codesandbox.io/s/reverent-currying-fbhix?fontsize=14&hidenavigation=1&theme=dark) and complete the activity in the `FadeIn.js` file.
+
+### useSpring Activity Solution
+
+```jsx
+import React, { useState } from "react";
+import { animated, useSpring } from "react-spring";
+
+/*
+ ** Exercise 1: useSpring
+ ** In this exercise you'll animate text in and out depending upon the state
+ ** The text will slide in and fade in from the top (30%) on show
+ ** and fade out and slide out towards the top on hide
+ */
+
+const FadeIn = () => {
+  const [show, setShow] = useState(false);
+  const animation = useSpring({
+    opacity: show ? 1 : 0,
+    transform: show ? `translateY(0)` : `translateY(-30%)`
+  });
+
+  return (
+    <div>
+      <button onClick={() => setShow(!show)}>Toggle animation</button>
+      <animated.p style={animation}>Animate me on click!</animated.p>
+    </div>
+  );
+};
+
+export default FadeIn;
+```
 
 ### useTransition
 
@@ -251,7 +282,53 @@ return transitions.map(
 );
 ```
 
-Now, it's your turn. Head over to [this CodeSandbox](https://codesandbox.io/s/reverent-currying-fbhix?fontsize=14&hidenavigation=1&theme=dark) and complete the activity in the `ExitModal.js` file.
+Now, it's your turn. Head over to [this CodeSandbox](https://codesandbox.io/s/reverent-currying-fbhix?fontsize=14&hidenavigation=1&theme=dark) and complete the activity in the `EmojiCarousel.js` file.
+
+### useTransition Activity Solution
+
+```jsx
+import React, { useState } from "react";
+import { animated, useTransition } from "react-spring";
+
+/*
+ ** Exercise 2: useToggle
+ ** In this exercise you'll transition between two emojis: sad and happy
+ ** You should have a happy state which will be a boolean denoting whether or not the emoji should
+ ** be happy or sad.
+ ** The emojis should transition from opacity: 0 to opacity: 1
+ ** The button text should change depending upon the happy state: "Make sad" if currently happy and "Make happy" if currently sad
+ */
+
+const EmojiCarousel = () => {
+  const [happy, setHappy] = useState(true);
+
+  const transition = useTransition(happy, null, {
+    from: { opacity: 0, position: "absolute" },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  });
+  return (
+    <div className="emoji-carousel">
+      <button onClick={() => setHappy(!happy)}>
+        {happy ? "Make sad" : "Make happy"}
+      </button>
+      {transition.map(({ item, props }) => {
+        return item ? (
+          <animated.span role="img" style={props} aria-label="Happy">
+            😀
+          </animated.span>
+        ) : (
+          <animated.span role="img" style={props} aria-label="Sad">
+            😭
+          </animated.span>
+        );
+      })}
+    </div>
+  );
+};
+
+export default EmojiCarousel;
+```
 
 ## Other React Spring Hooks
 

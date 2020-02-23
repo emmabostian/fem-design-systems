@@ -20,7 +20,10 @@ export const defaultTheme = {
   errorColorActive: red[300],
   successColor: green[100],
   successColorHover: green[200],
-  successColorActive: green[300]
+  successColorActive: green[300],
+  formElementBackground: neutral[100],
+  textFieldBackground: neutral[200],
+  textFieldLabelColor: neutral[500]
 };
 
 export const darkTheme = {
@@ -42,5 +45,8 @@ export const darkTheme = {
   errorColorActive: red[300],
   successColor: green[100],
   successColorHover: green[200],
-  successColorActive: green[300]
+  successColorActive: green[300],
+  formElementBackground: neutral[100],
+  textFieldBackground: neutral[200],
+  textFieldLabelColor: neutral[100]
 };

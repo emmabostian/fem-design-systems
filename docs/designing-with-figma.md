@@ -25,7 +25,7 @@ There are many factors that go into building a button. We touched upon these ear
 - Error
 - Success
 
-Buttons should be labeled with what they do and it should be clear, given a circumstance, what action clicking the button will trigger.
+Buttons should be labeled with what they do and it should be clear what action clicking the button will trigger.
 
 A modal asking 'Do you want to delete this document' with two buttons labeled 'Okay' and 'Cancel' might at first glance seem sufficient, but the 'Okay' label leaves something to be desired.
 
@@ -39,7 +39,7 @@ Primary buttons should be used for the most important action on a page (i.e. log
 
 Secondary buttons should be used for content which, while still important, won't trigger the highest-priority action on the page. You may want to use secondary buttons for navigating to other content on the page.
 
-Tertiary buttons are used for miscellaneous actions; actions which are not something the user needs to do at that given second. This might be an action like 'Read more'.
+Tertiary buttons are used for miscellaneous actions; actions which are not something the user needs to do at that given second. This might be an action like 'Read more' on a blog post.
 
 ## Button Styles
 
@@ -49,15 +49,19 @@ Your buttons should look and function like a button.
 
 Here are some common button patterns which are familiar to most users.
 
-![Buttons](https://miro.medium.com/max/224/1*UZTsPglcLschWx2IUMt7dg.png)
+![Buttons](images/primary-buttons.png)
 
 ### Solid Buttons
 
 Solid buttons are buttons with a solid background fill. They're easily recognizable and a great choice for a primary button.
 
+![Solid buttons](images/solid-buttons.png)
+
 ### Line / Ghost Buttons
 
 Ghost buttons are buttons without a background fill; they only have an outline.
+
+![Ghost buttons](images/ghost-buttons.png)
 
 ### Icon Buttons
 
@@ -65,15 +69,21 @@ Icon buttons have no label and are only an icon. Keep in mind that buttons and i
 
 However, if you do choose to forgo the label, be sure to include an `aria-label` attribute on the button explaining the action that will be completed when triggered and not an explanation of what the icon is.
 
+![Icon buttons](images/icon-buttons.png)
+
 ### Border Radius
 
 You may choose to have a button with 90 degree squared edges, a partial border-radius, or a full border-radius and it will impact your brand identity.
 
 Rounded buttons are more playful than buttons with squared edges. Your button design should coincide with your brand identity.
 
+![Border radius](images/border-radius.png)
+
 ### Drop Shadow
 
 You may also choose to add a drop shadow to your button which will elevate it off the page. You can add a drop shadow, or box shadow, to a button on hover or focus as well.
+
+![Drop shadow](images/drop-shadow.png)
 
 ### Label Style
 
@@ -83,11 +93,15 @@ You also need to ensure that you have sufficient color contrast between the labe
 
 Lastly, use a font-weight which is legible.
 
+![Label](images/label.png)
+
 ### Vertical Padding
 
 You must ensure your buttons are large enough to be accessible and clickable on a mobile device. Instead of stating a hard-coded height for your button, add vertical padding. This will allow the browser to change the text size (for visually impaired users) without cutting off the text.
 
 Vertical padding of `16px` is a great option for a large button, `8px` for a default button, and `4px` for a small button.
+
+![Vertical padding](images/vertical-padding.png)
 
 ### Horizontal Padding
 
@@ -95,9 +109,13 @@ To keep your buttons responsive, you can add horizontal padding. You can additio
 
 For example, `32px` of padding on the left and right side of the button with a `min-width` of `100px` is a great option.
 
+![Horizontal padding](images/horizontal-padding.png)
+
 ## Building A Button
 
 Let's design our default primary, secondary, and tertiary buttons.
+
+I've created a Figma starter kit for you to copy. You can grab it [here](), copy and paste it into a new project.
 
 Our primary button will be a filled button which uses our primary color (primary-300) and will use either black or white text depending upon color contrast ratios.
 
@@ -105,7 +123,7 @@ Our secondary button will be either a ghost button or a filled button having a l
 
 Our tertiary button will be the button label without a background color or outline.
 
-Create a new Figma page and name it 'Buttons'. Create a table with the following structure:
+In the Figma starter you cloned I've created a table with the following axes. It's your job to fill it in with button designs!
 
 ### X-Axis Labels
 
@@ -166,7 +184,7 @@ Take the next 30 minutes and design your buttons in Sigma
 
 Once completed, right click on your default elements (primary, secondary, tertiary, etc.) and click "Create component." You can also select the component and type "option + command + k" on a Mac as a shortcut.
 
-You can also add a component description in the right-hand sidebar.
+You can additionally add a component description in the right-hand sidebar.
 
 Then on the left sidebar click "Assets" and you should see your components there.
 

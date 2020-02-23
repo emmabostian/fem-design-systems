@@ -1048,12 +1048,6 @@ If you toggle the state you should see our theme working! You may also find some
 
 ![Dark theme](images/dark-theme.png)
 
-## Icons
-
-Now let's add some icons. Create a new directory inside of `src` called `icons/`.
-
-Download your Figma save icon and add it as an SVG inside of the `icons/` folder.
-
 ## Modals
 
 Now we're ready to create our first composite component! Create a new file `Modal.js` inside of the `components/` folder.

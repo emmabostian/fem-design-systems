@@ -120,34 +120,36 @@ You can define your spring in a few ways.
 
 You can define both the `from` and `to` values.
 
-```
+```jsx
 const animation = useSpring({
-	from: { opacity: 0, transform: `translateY(-200%)` },
-	to: { opacity: 1, transform: `translateY(0)` }
+  from: { opacity: 0, transform: `translateY(-200%)` },
+  to: { opacity: 1, transform: `translateY(0)` }
 });
 ```
 
 You can define just the `to` value. This will take the default CSS from the DOM element as the `from` attribute values.
 
-```
-const animation = useSpring({ to: {
-	opacity: 1,
-	transform: `translateY(0%)`
-}});
+```jsx
+const animation = useSpring({
+  to: {
+    opacity: 1,
+    transform: `translateY(0%)`
+  }
+});
 ```
 
 You can omit the `to` keyword and wrapping object as well to clean up your syntax.
 
-```
+```jsx
 const animation = useSpring({
-	opacity: 1,
-	transform: `translateY(0%)`
+  opacity: 1,
+  transform: `translateY(0%)`
 });
 ```
 
 Or you can use React hook state with a ternary operator to define the spring.
 
-```
+```jsx
 const [showModal, setShowModal] = useState(false);
 const animation = useSpring({
 	opacity: showModal ? 1 : 0,
@@ -157,20 +159,20 @@ const animation = useSpring({
 
 Once you have defined your `useSpring` hook, you need to preface the animatable element HTML with `animated.` to tell `react-spring` that this element will be animated.
 
-```
+```jsx
 <animated.div></animated.div>
 <animated.h1></animated.h1>
 ```
 
 Lastly, you must pass your `animation` constant as a `style` attribute on the animatable DOM element.
 
-```
+```jsx
 <animated.div style={animation}></animated.div>
 ```
 
 Putting that all together we get the following:
 
-```
+```jsx
 import React, { useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 
@@ -191,7 +193,7 @@ Now, it's your turn. Head over to [this CodeSandbox](https://codesandbox.io/s/re
 
 ### useTransition
 
-`useTransition` is a bit more complex and will mount and unmount your elements from the DOM.
+`useTransition` is a bit more complex and will mount and unmount your elements from the DOM. It can also transition between different elements in the DOM (like in a photo album).
 
 To define your `useTransition` hook, you must define the `from`, `enter`, and `leave` attributes.
 
@@ -199,7 +201,7 @@ To get our transition to render we can't simply pass it as a `style` attribute; 
 
 You can transition arrays of elements:
 
-```
+```jsx
 const [items, set] = useState([...])
 const transitions = useTransition(items, item => item.key, {
 	from: { opacity: 0 },
@@ -214,32 +216,39 @@ return transitions.map(({ item, props, key }) =>
 
 You can toggle between two different elements.
 
-```
-const [toggle, set] = useState(false)
+```jsx
+const [toggle, set] = useState(false);
 const transitions = useTransition(toggle, null, {
-	from: { position: 'absolute', opacity: 0 },
-	enter: { opacity: 1 },
-	leave: { opacity: 0 },
-})
+  from: { position: "absolute", opacity: 0 },
+  enter: { opacity: 1 },
+  leave: { opacity: 0 }
+});
 return transitions.map(({ item, key, props }) =>
-	item
-	  ? <animated.div style={props}>Hello</animated.div>
-	  : <animated.div style={props}>Goodbye</animated.div>
-	)
+  item ? (
+    <animated.div style={props}>Hello</animated.div>
+  ) : (
+    <animated.div style={props}>Goodbye</animated.div>
+  )
+);
 ```
 
 Or you can mount and unmount one element, like a modal, from the DOM based on a conditional statement.
 
-```
-const [show, set] = useState(false)
+```jsx
+const [show, set] = useState(false);
 const transitions = useTransition(show, null, {
-	from: { position: 'absolute', opacity: 0 },
-	enter: { opacity: 1 },
-	leave: { opacity: 0 },
-})
-return transitions.map(({ item, key, props }) =>
-	item && <animated.div key={key} style={props}>I'm mounted!</animated.div>
-)
+  from: { position: "absolute", opacity: 0 },
+  enter: { opacity: 1 },
+  leave: { opacity: 0 }
+});
+return transitions.map(
+  ({ item, key, props }) =>
+    item && (
+      <animated.div key={key} style={props}>
+        I'm mounted!
+      </animated.div>
+    )
+);
 ```
 
 Now, it's your turn. Head over to [this CodeSandbox](https://codesandbox.io/s/reverent-currying-fbhix?fontsize=14&hidenavigation=1&theme=dark) and complete the activity in the `ExitModal.js` file.
@@ -254,7 +263,7 @@ The full list can be found [here](https://www.react-spring.io/docs/hooks/basics)
 
 First install `react-spring`
 
-```
+```jsx
 yarn add react-spring
 ```
 
@@ -262,7 +271,7 @@ Let's first create the state we'll need to show and hide the modal.
 
 Inside `index.js` let's create new state called `showModal`. Then let's add a button underneath the theme switcher buttons which will toggle the visibility of our modal.
 
-```
+```jsx
 const [showModal, setShowModal] = useState(false);
 
 ...
@@ -272,13 +281,13 @@ const [showModal, setShowModal] = useState(false);
 
 Lastly, let's pass `showModal` and `setShowModal` as properties to our `SignUpModal` component.
 
-```
+```jsx
 <SignUpModal showModal={showModal} setShowModal={setShowModal} />
 ```
 
-Inside `Modals.js` we can now pass `showModal` and `setShowModal` as properties.
+Inside `Modals.js` we can now destructure `showModal` and `setShowModal` from props.
 
-```
+```jsx
 export const SignUpModal = ({ showModal, setShowModal }) => {
 ```
 
@@ -286,24 +295,24 @@ We'll use `react-spring` to show and hide our modal.
 
 Import `animated` and `useSpring` from `react-spring`.
 
-```
+```jsx
 import { useSpring, animated, config } from "react-spring";
 ```
 
 Now let's define our animation. We can use the hook state `showModal` to determine the styling of our modal.
 
-```
+```jsx
 const animation = useSpring({
-opacity: showModal ? 1 : 0,
-transform: showModal ? `translateY(0)` : `translateY(-200%)`,
+  opacity: showModal ? 1 : 0,
+  transform: showModal ? `translateY(0)` : `translateY(-200%)`
 });
 ```
 
 Lastly, let's wrap `WrapperModal` in an `animated.div` element and pass our animation as the `style` prop.
 
-```
+```jsx
 <animated.div style={animation}>
- <ModalWrapper>
+  <ModalWrapper>
     <SignUp />
     <SignUpHeader>Sign Up</SignUpHeader>
     <SignUpText>
@@ -323,16 +332,16 @@ Finally let's use the `react-spring` config to slow down the animation.
 
 Import `config` from `react-spring`.
 
-```
+```jsx
 import { useSpring, animated, config } from "react-spring";
 ```
 
 Now we can add it as property in the `useSpring` definition. We'll use the `slow` configuration.
 
-```
+```jsx
 const animation = useSpring({
-	opacity: showModal ? 1 : 0,
-	transform: showModal ? `translateY(0)` : `translateY(-200%)`,
-	config: config.slow
+  opacity: showModal ? 1 : 0,
+  transform: showModal ? `translateY(0)` : `translateY(-200%)`,
+  config: config.slow
 });
 ```

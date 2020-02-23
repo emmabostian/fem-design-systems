@@ -8,13 +8,13 @@ Admittedly it took me quite a while to come to terms with the new syntax, but on
 
 There are several different CSS-in-JS libraries, but the one we'll be using today is [styled components](https://styled-components.com/).
 
-Styled components provides many benefits, like scoped styling (no more worrying about bleeding CSS specificity or rogue !importants).
+Styled components provides many benefits, like scoped styling (no more worrying about bleeding CSS specificity or rogue `!importants`).
 
 ## Application Architecture & Workflow
 
 We're going to build our components using [create-react-app](https://github.com/facebook/create-react-app).
 
-I wouldn't condone using `create-react-app` under normal circumstances if you're building an enterprise design system; this tool is great for building React _applications_ but not for creating component libraries.
+**I wouldn't condone using `create-react-app` under normal circumstances if you're building an enterprise design system; this tool is great for building React _applications_ but not for creating component libraries.**
 
 So then, you might ask, why are we using it today?
 
@@ -22,35 +22,29 @@ Well, my friends, building a component library is not cut-and-dry. It requires a
 
 We have a few options when it comes to building components and observing them in real-time.
 
-1. Write our code, build our package, publish to the npm registry, update our package in a React application, and see if it works.
+1. Write our code, build our package, publish to the npm registry, install our package in a React application, and see if it works.
 
-It's probably not a shock that this is **not** an optimal or even realistic solution.
+This option isn't optimal as it doesn't allow us to view our components as we're building them.
 
-2. Create a mono repository, a project where many projects or packages are stored in the same repo, however this would require taking the time to troubleshoot [Yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) and [Lerna](https://github.com/lerna/lerna).
+2. Create a mono repository, a project where many projects or packages are stored in the same repo.
 
-This is the architecture you would want if you are building a component library within a company. It is the most robust solution and easily manageable. It also has several benefits including smart dependency management (it will only install one version of an npm package even if used in all containing repos).
+This would require taking the time to troubleshoot [Yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) and [Lerna](https://github.com/lerna/lerna).
+
+**This is the architecture you would want if you are building a component library within a company. It is the most robust solution and easily manageable. It also has several benefits including smart dependency management (it will only install one version of an npm package even if used in all containing repos).**
 
 Unfortunately I _don't_ have experience with either of these technologies and would consume a lot of time trying to troubleshoot and set up.
-
-Thus... I've opted for option 3 for this workshop.
-
-If there's a future version of this workshop, I would love to include the setup of a monorepo, but I simply didn't have time!
-
-And that leads us to option three...
-
-3. Use `create-react-app` to build and test our components and once stable, publish to npm in a new directory.
-
-I recognize that this option is not ideal, but for the sake of time it's the best solution.
 
 There was a library I attempted, and hoped, to use for this workshop called `create-react-library`, which you can check out [here](https://www.npmjs.com/package/create-react-library), but unfortunately getting it to work with styled components was a hassle and many of the dependent packages were sorely deprecated.
 
 If they update this library to use the newest version of React, this is the solution I would opt for!
 
-Once we build our component library with `create-react-app`, we'll create a new directory where I'll teach you how to create the build pipeline using [`rollup.js`](https://rollupjs.org/guide/en/).
+Thus... I've opted for option 3 for this workshop.
 
-We'll publish our component library to `npm` then head over to [Code Sandbox](https://codesandbox.io/dashboard), install, and use our component library.
+If there's a future version of this workshop, I would love to include the setup of a monorepo, but I simply didn't have time!
 
-Just to re-iterate, this is **not how you should scaffold your component library; please use a monorepo!**.
+3. Use `create-react-app` to build and test our components.
+
+I recognize that this option is not ideal, and learning how to publish our component library today would be extremely valuable but due to the time constraint and my lack of knowledge in this area, as well as each company having individualized build and deployment processes, I opted to keep this part out of the workshop.
 
 ## Editor Settings
 
@@ -68,8 +62,9 @@ This is a great tool because it allows you to leverage tools without installing 
 
 Once in your desired location, run the following commands to create a new project.
 
+If you don't have `npx` I recommend downloading it!
+
 ```js
-cd ~/Desktop
 npx create-react-app my-component-library && cd my-component-library
 ```
 
@@ -77,9 +72,9 @@ I am then going to open my React application in my editor of choice: [VS Code](h
 
 I use the command `code .` to open the current project in VSCode. You can install the VSCode command line interface (CLI) [here](https://code.visualstudio.com/docs/editor/command-line) if you'd also like this functionality!
 
-Before we run our React application, let's remove some of the boilerplate.
-
 Once VSCode is open I prefer to use the integrated terminal. You can open this by clicking control + back tick on Mac, or by going to the View menu and clicking Terminal.
+
+Before we run our React application, let's remove some of the boilerplate.
 
 Run the following command to remove everything inside of the `src` folder.
 
@@ -95,7 +90,7 @@ Now let's add a new file inside of the `src/` folder called `index.js`.
 
 Let's just add a simple `App` component which returns a `div` containing the words "Hello World".
 
-```
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -116,7 +111,8 @@ Once installed, create a new folder called `components` inside the `src/` direct
 
 Inside the `Buttons.js` file let's import `styled` from `styled-components` and add our first styled component.
 
-```
+```jsx
+import React from "react";
 import styled from "styled-components";
 
 const PrimaryButton = styled.button`
@@ -132,10 +128,10 @@ export default PrimaryButton;
 
 Back inside of `index.js`, import `PrimaryButton` from `./components/Button` and render it inside of the wrapping `div`.
 
-```
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
-import Button from "./components/Buttons";
+import PrimaryButton from "./components/Buttons";
 
 const App = () => (
   <div>
@@ -154,7 +150,7 @@ Let's create a second button called `SecondaryButton`. We want this button to in
 
 So let's extract out the common button properties we _know_ we will need in all three base buttons (primary, secondary, tertiary). This will be based on your Figma design, so your code may look a bit different than mine.
 
-```
+```jsx
 const Button = styled.button`
   padding: 8px 12px;
   font-size: 1rem;
@@ -165,15 +161,34 @@ const Button = styled.button`
 `;
 ```
 
-Now to use our custom Google font, grab the link which you can find when adding a font within the Google fonts site, and add it within the `head` in the `index.html` file.
+To use our custom Google font, grab the link which you can find when adding a font within the Google fonts site, and add it within the `head` in the `index.html` file.
 
 Now let's refactor our `PrimaryButton` component.
 
 We want this component to inherit the properties from the `Button` component. So instead of setting `const PrimaryButton = styled.button` we can write `const PrimaryButton = styled(Button)`.
 
+We can now remove out the styles being applied from the `Button` component.
+
+```jsx
+const Button = styled.button`
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 2px;
+  min-width: 100px;
+  cursor: pointer;
+  font-family: "Roboto Mono", monospace;
+`;
+
+const PrimaryButton = styled.Button`
+  ...;
+`;
+```
+
 Let's create a new `const` which contains the hex code for the background color of our primary button. You can add this underneath the `styled` import.
 
-```
+These colors will be _your_ primary colors from your Figma kit.
+
+```jsx
 const primaryBlue = "#030086";
 ```
 
@@ -181,7 +196,7 @@ Next, let's add the individual properties we want our `PrimaryButton` component 
 
 We can use our `primaryBlue` variable inside of our styled component with the `${}` syntax.
 
-```
+```jsx
 const PrimaryButton = styled(Button)`
   background-color: ${primaryBlue};
   color: white;
@@ -191,9 +206,9 @@ const PrimaryButton = styled(Button)`
 
 And now if we head back to our browser we should see the primary button with updated styling.
 
-Great, let's build out our secondary button.
+Great, let's build out our secondary button. This also inherits from the `Button` component.
 
-```
+```jsx
 export const SecondaryButton = styled(Button)`
   border: 2px solid ${primaryBlue};
   color: ${primaryBlue};
@@ -202,7 +217,7 @@ export const SecondaryButton = styled(Button)`
 
 If we import this into `index.js` and render it underneath our `PrimaryButton` we should now see our primary and secondary buttons rendering in the UI.
 
-```
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
 import PrimaryButton, { SecondaryButton } from "./components/Buttons";
@@ -217,16 +232,18 @@ const App = () => (
 ReactDOM.render(<App />, document.querySelector("#root"));
 ```
 
+_The primary button import is outside of the curly brackets because it's the default export in our `Buttons` file. We'll change this in a later step._
+
 Now it's your turn. Go ahead and add your tertiary button and render it in the UI.
 
-```
+```jsx
 export const TertiaryButton = styled(Button)`
   border: 2px solid transparent;
   color: ${primaryBlue};
 `;
 ```
 
-```
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
 import PrimaryButton, {
@@ -247,15 +264,21 @@ ReactDOM.render(<App />, document.querySelector("#root"));
 
 ## Adding Utilities
 
-So this looks great! But it isn't extensible. Let's create a `utils/` folder inside of `src/` which will hold all of our foundational design system elements.
+So this looks great! But it isn't extensible. Now let's build a set of utilities to help us build our components.
+
+Let's create a `utils/` folder inside of `src/` which will hold all of our foundational design system elements.
 
 Inside of the `utils/` folder create three new files: `colors.js`, `themes.js`, and `typography.js`.
+
+### Design Tokens
+
+Design tokens were created prior to 2014 by Jina Anne (you can watch the conference talk [here](https://www.youtube.com/watch?v=wDBEc3dJJV8)) and they allow you to 'capture low-level values and then use them to create styles for your product or app.'.
 
 Inside `colors.js` add your color palette. Even though we called the primary color swatches `primary-100`, `primary-200`, we're going to name the colors by color name (we'll get to the `primary` color themes in the next section).
 
 The color tokens will be an object containing the values in increments of 100 which will allow us to access them using the syntax `blue[100]`.
 
-```
+```jsx
 export const blue = {
   100: "#3a36e0",
   200: "#0804b8",
@@ -296,13 +319,13 @@ Next let's add our typography.
 
 Inside `typography.js` create and export a variable with your font family of choice.
 
-```
+```jsx
 export const primaryFont = '"Roboto Mono", monospace';
 ```
 
 Let's also add our typescale.
 
-```
+```jsx
 export const typeScale = {
   header1: "1.8rem",
   header2: "1.6rem",
@@ -319,7 +342,7 @@ Now that we have the individual tokens, let's create a theme. Themes are great i
 
 Inside `themes.js` create a default theme and let's add the following values.
 
-```
+```jsx
 import { blue, neutral } from "./colors";
 import { primaryFont } from "./typography";
 
@@ -336,7 +359,7 @@ export const defaultTheme = {
 
 Lastly let's add an `index.js` file inside of `utils/` which exports each utility.
 
-```
+```jsx
 export * from "./colors";
 export * from "./typography";
 export * from "./themes";
@@ -346,20 +369,20 @@ This will allow us to import utilities from the `utils` folder instead of the in
 
 For example we can simply write the following to import our default theme.
 
-```
+```jsx
 import { defaultTheme } from "../utils";
 ```
 
 If we didn't have the index file we would have to name the specific file we wanted to import the utility from, so this is much cleaner.
 
-```
+```jsx
 // We don't need this now!
 import { defaultTheme } from "../utils/themes";
 ```
 
 Finally let's use our theme inside of our `Buttons.js` file and remove the hard coded values.
 
-```
+```jsx
 import styled from "styled-components";
 import { defaultTheme } from "../utils";
 
@@ -399,7 +422,7 @@ There is a way to add global styles to our styled components, which we'll want t
 
 First, let's install a helper package called [`polished`](https://github.com/styled-components/polished). This gives us some great features, one of which we'll use right now: normalize.
 
-Let's install the package
+Let's install the package.
 
 ```
 yarn add polished
@@ -407,7 +430,7 @@ yarn add polished
 
 Inside of the `utils/` directory, create a new file called `Global.js`. Let's add the following.
 
-```
+```jsx
 import { createGlobalStyle } from "styled-components";
 import { primaryFont } from "./typography";
 import { normalize } from "polished";
@@ -439,7 +462,7 @@ export default GlobalStyle;
 
 Back inside `index.js` let's import our global styles and render it as a self-closing tag at the end of our JSX.
 
-```
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
 import PrimaryButton, {
@@ -468,7 +491,7 @@ We can simply nest styling just as you would with a CSS pre-processor like Sass.
 
 Since all three of my buttons (primary, secondary, and tertiary) have the same hover state, I'll add the state to the `Button` component. I'll also add a transition to smooth out the background and color changes.
 
-```
+```jsx
 const Button = styled.button`
   padding: 8px 12px;
   font-size: ${typeScale.paragraph};
@@ -489,7 +512,7 @@ We should now see our transitions being added to our buttons.
 
 Go ahead and add the rest of the states. You may also want to add some of these variables to your theme (i.e. disabled).
 
-```
+```jsx
 import styled from "styled-components";
 import { defaultTheme, paragraph } from "../utils";
 
@@ -557,9 +580,11 @@ export default PrimaryButton;
 
 We can test out disabled by adding the `disabled` attribute to one of our buttons.
 
-```
+```jsx
 <PrimaryButton disabled>Hello World</PrimaryButton>
 ```
+
+You should see your disabled button rendering in the UI.
 
 ## Adding Button Variations
 
@@ -567,13 +592,13 @@ Now that we have our default buttons, let's add our variations: large, small, ic
 
 First let's install a package which will help us create these modifiers.
 
-```
+```jsx
 yarn add styled-components-modifiers
 ```
 
 Inside `Buttons.js` import the `applyStyleModifiers` module from `styled-components-modifiers`.
 
-```
+```jsx
 import { applyStyleModifiers } from "styled-components-modifiers";
 ```
 
@@ -581,7 +606,7 @@ We'll also need to import the `typeScale` variable to be used within our modifie
 
 Next, let's define a variable which will hold all of our modifiers. Let's start with small and large.
 
-```
+```jsx
 const BUTTON_MODIFIERS = {
   small: () => `
     font-size: ${typeScale.helperText};
@@ -594,11 +619,11 @@ const BUTTON_MODIFIERS = {
 };
 ```
 
-Finally inside `index.js` we can add the modifiers as an array on the button components.
+Finally inside `index.js` we can add the modifiers as an array on the button components, or as simple strings if there is only one.
 
-```
+```jsx
 <PrimaryButton modifiers={["small"]}>Hello World</PrimaryButton>
-<SecondaryButton modifiers={["large"]}>Goodbye World</SecondaryButton>
+<SecondaryButton modifiers='large'>Goodbye World</SecondaryButton>
 ```
 
 Your primary button should be rendering as a small button and your secondary button should be large.
@@ -607,7 +632,7 @@ Now add modifiers for the statuses: warning, error, and success.
 
 First I added some new variables to my theme.
 
-```
+```jsx
 import { blue, neutral, yellow, green, red } from "./colors";
 
 ...
@@ -623,9 +648,9 @@ successColorHover: green[200],
 successColorActive: green[300]
 ```
 
-Next let's add the modifiers:
+Next let's add the modifiers for the warning, success, and error states.
 
-```
+```jsx
 import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
 import { defaultTheme, helperText, header5, paragraph } from "../utils";
@@ -746,17 +771,17 @@ We have to move the `applyStyleModifiers` underneath each individual button bloc
 
 Now inside `index.js` we can add another modifier to our buttons.
 
-```
+```jsx
 <PrimaryButton modifiers={["small", "success"]}>Hello World</PrimaryButton>
 ```
 
 ## Making Extensible Themes
 
-Currently we're referencing the `defaultTheme` directly inside of our components, but what if we want the dynamic theme?
+Currently we're referencing the `defaultTheme` directly inside of our components, but what if we want a dynamic theme which can be changed?
 
 Let's create a second theme object inside `themes.js`. This will hold our dark theme.
 
-```
+```jsx
 export const darkTheme = {
   primaryColor: neutral[100],
   primaryHoverColor: neutral[200],
@@ -781,7 +806,9 @@ export const darkTheme = {
 
 We now need a way to toggle the dark theme. We'll use React's `useState` to do this.
 
-```
+Inside of `index.js` let's import `useState` and create a boolean variable `useDarkTheme` which will tell us which theme we should use.
+
+```jsx
 import React, { useState } from "react";
 ...
 
@@ -793,13 +820,13 @@ const App = () => {
   return (
 ```
 
-We also need to use the `ThemeProvider` component which will wrap our entire application and pass the theme as a property.
+We also need to use the `ThemeProvider` component which will wrap our entire application and pass the theme as a property. Inside `index.js` import `ThemeProvider`, then wrap the entire JSX return statement in `<ThemeProvider>`
 
-```
+```jsx
 import { ThemeProvider } from "styled-components";
 ```
 
-```
+```jsx
 const App = () => {
   const [useDarkTheme, setUseDarkTheme] = useState(false);
   return (
@@ -810,7 +837,9 @@ const App = () => {
 
 Let's add two buttons to toggle the dark theme state.
 
-```
+You can also use one if you prefer simply toggling the state instead of being explicit with two buttons.
+
+```jsx
 return (
 	  <ThemeProvider>
 			<button onClick={() => setUseDarkTheme(true)}>Dark theme</button>
@@ -819,9 +848,11 @@ return (
 	  </ThemeProvider>
 ```
 
-Let's wrap our primary, secondary, and tertiary buttons in a containing div so we can change the background color depending upon the theme. We'll also add some inline styling to this div.
+Let's wrap our primary, secondary, and tertiary buttons in a containing div so we can change the background color depending upon the theme. (If it's dark theme, we need a dark background.)
 
-```
+We'll also add some inline styling to this div.
+
+```jsx
 const App = () => {
   const [useDarkTheme, setUseDarkTheme] = useState(false);
   return (
@@ -856,7 +887,9 @@ Finally let's update our `Buttons.js` file to use our theme prop.
 
 We can replace the `${defaultTheme.<<prop>>}` with the following syntax: `${props => props.theme.<<prop>>}`.
 
-```
+Our components will take a theme prop from the `ThemeProvider` and render the proper value.
+
+```jsx
 import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
 import { primaryFont, typeScale } from "../utils";
@@ -990,7 +1023,7 @@ Now we're ready to create our first composite component! Create a new file `Moda
 
 Additionally, create an `index.js` file and let's export all components from `Buttons.js` and `Modals.js`.
 
-```
+```jsx
 export * from "./Buttons";
 export * from "./Modals";
 ```
@@ -1003,7 +1036,7 @@ Inside of `src/` create an `assets/` folder and inside add an `illustrations/` f
 
 Let's export our SVG as a stateless functional React component.
 
-```
+```jsx
 import React from "react";
 
 export const SignUp = () => (
@@ -1231,7 +1264,7 @@ export const SignUp = () => (
 
 Let's also create an `index.js` file inside of the `assets` folder and export our newly added illustration.
 
-```
+```jsx
 export * from "./illustrations/SignUp";
 ```
 
@@ -1239,7 +1272,7 @@ Let's also add a new variable to our themes `formElementBackground`.
 
 This will be the same for both the `defaultTheme` and the `darkTheme` and will be used to style the modal background.
 
-```
+```jsx
 formElementBackground: neutral[100],
 ```
 
@@ -1247,7 +1280,7 @@ Inside of `Modals.js` let's import `React` as well as `styled-components`.
 
 First let's create our modal wrapper which will contain all of the styling for our modal.
 
-```
+```jsx
 const ModalWrapper = styled.div`
   width: 800px;
   height: 500px;
@@ -1265,13 +1298,13 @@ const ModalWrapper = styled.div`
 
 Next, let's create the sign up header and sign up content as styled components. They will both use our type scale.
 
-```
+```jsx
 const SignUpHeader = styled.h3`
-  ${header3}
+  font-size: ${typeScale.header3};
 `;
 
 const SignUpText = styled.p`
-  ${paragraph}
+  font-size:: ${paragraph};
   max-width: 70%;
   text-align: center;
 `;
@@ -1281,31 +1314,28 @@ Now let's create a `SignUpModal` which inherits from `ModalWrapper`. This will a
 
 You can of course create a basic `Modal` element and add children inside, which is great to encapsulate logic closer to where it's being used, but for the sake of this tutorial let's create the sign up modal inside of the `Modals` file.
 
-```
+```jsx
 export const SignUpModal = () => {
   return (
-  <ModalWrapper>
-    <SignUp />
-    <SignUpHeader>Sign Up</SignUpHeader>
-    <SignUpText>
-      Sign up today to get access to all of our content and features!
-    </SignUpText>
-    <PrimaryButton onClick={() => console.log("You signed up!")}>
-      Sign Up
-    </PrimaryButton>
-    <CloseModalButton onClick={() => setShow(false)}>
-      <CloseIcon />
-    </CloseModalButton>
-  </ModalWrapper>
+    <ModalWrapper>
+      <SignUp />
+      <SignUpHeader>Sign Up</SignUpHeader>
+      <SignUpText>
+        Sign up today to get access to all of our content and features!
+      </SignUpText>
+      <PrimaryButton onClick={() => console.log("You signed up!")}>
+        Sign Up
+      </PrimaryButton>
+    </ModalWrapper>
   );
 };
 ```
 
 Now let's add our close icon. We can export it as an SVG from Figma and create a new file `CloseIcon.js` inside of our assets folder. Create a new folder `icons/` inside of `assets/` and place `CloseIcon.js` inside.
 
-Let's to make `CloseIconWrapper` a styled component so we can set some styling on it.
+Let's make `CloseIconWrapper` a styled component so we can set some styling on it.
 
-```
+```jsx
 import React from "react";
 import styled from "styled-components";
 
@@ -1327,9 +1357,9 @@ export const CloseIcon = () => (
 );
 ```
 
-Now let's export `CloseIcon` from `index.js`.
+Now let's export `CloseIcon` from the assets `index.js`.
 
-```
+```jsx
 export * from "./icons/CloseIcon";
 ```
 
@@ -1337,7 +1367,7 @@ We can import `CloseIcon` into `Modals.js` and use it in our `SignUpModal` compo
 
 First let's create a button which will wrap the `CloseIcon`. Then we'll instantiate the icon inside of the button.
 
-```
+```jsx
 import { SignUp, CloseIcon } from "../assets";
 
 ...
@@ -1347,17 +1377,35 @@ const CloseModalButton = styled.button`
   border: none;
 `;
 
-<CloseModalButton>
-	<CloseIcon />
-</CloseModalButton>
+export const SignUpModal = () => {
+  return (
+  <ModalWrapper>
+    <SignUp />
+    <SignUpHeader>Sign Up</SignUpHeader>
+    <SignUpText>
+      Sign up today to get access to all of our content and features!
+    </SignUpText>
+    <PrimaryButton onClick={() => console.log("You signed up!")}>
+      Sign Up
+    </PrimaryButton>
+    <CloseModalButton onClick={() => setShow(false)}>
+      <CloseIcon />
+    </CloseModalButton>
+  </ModalWrapper>
+  );
+};
 ```
 
 If we head back to `index.js` we can import `SignUpModal` and instantiate it.
 
-```
+```jsx
 import { SignUpModal } from "./components";
 
 ...
 
 <SignUpModal />
 ```
+
+## Activity
+
+Now build your second Figma modal which you designed in the last chapter.

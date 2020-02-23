@@ -54,11 +54,14 @@ If you go back to the UI we can see it's rendering a button but it isn't styled 
 
 This is because our buttons rely on a theme prop to be passed with `ThemeProvider`.
 
+![Storybook](images/storybook.png)
+
 ## Passing Themes To Storybook Components
 
 Inside `Button.stories.js` let's import a few additional things.
 
 ```jsx
+import React, { useContext } from "react";
 import { ThemeProvider, ThemeContext } from "styled-components";
 import { defaultTheme } from "../utils";
 import { storiesOf } from "@storybook/react";
@@ -115,6 +118,10 @@ storiesOf("Button")
   ));
 ```
 
+Your button should now be rendering with the appropriate theme!
+
+![Storybook](images/storybook-2.png)
+
 This is a bit verbose so let's refactor it.
 
 Underneath the `Theme` variable declaration, let's create a default export for this component. This will define our decorator so we don't have to use the `storiesOf` operator.
@@ -149,6 +156,8 @@ export const Tertiary = () => (
   </Theme>
 );
 ```
+
+Your UI should still be working as expected.
 
 ## Addons
 
@@ -196,6 +205,10 @@ yarn add --dev @storybook/addon-knobs
 
 And add it to your `addons` array in `main.js`.
 
+```js
+"@storybook/addon-knobs";
+```
+
 We want to create knobs, or select drop downs, which allow us to choose our button size and status color as well as toggle the disabled state.
 
 Inside `Button.stories.js` import the following.
@@ -218,12 +231,16 @@ export default {
 
 First let's create our default primary button which will show the primary button in its natural state. We'll give it a bottom margin so it doesn't collide with the elements below it.
 
+Inside the `PrimaryButton` story add the following.
+
 ```jsx
-<p style={{ fontFamily: "Arial" }}>Default primary button</p>
-<PrimaryButton style={{ marginBottom: "50px" }} onClick={action("clicked")}>
-  Primary button
-</PrimaryButton>
-<br />
+<Theme>
+  <p style={{ fontFamily: "Arial" }}>Default primary button</p>
+  <PrimaryButton style={{ marginBottom: "50px" }} onClick={action("clicked")}>
+    Primary button
+  </PrimaryButton>
+  <br />
+</Theme>
 ```
 
 Now let's create another primary button which will accept our modifiers.
@@ -233,18 +250,24 @@ There will be two items in our `modifiers` array: two select boxes with size and
 Then we can add the `disabled` state and set it to a `boolean` initialized to `false`.
 
 ```jsx
-<p style={{ fontFamily: "Arial" }}>Primary button with modifiers</p>
-<PrimaryButton
-  modifiers={[
-    select("Size", ["small", "large"]),
-    select("Status", ["warning", "error", "success"])
-  ]}
-  disabled={boolean("Disabled", false)}
-  onClick={action("clicked")}
->
-  Primary button
-</PrimaryButton>
+<Theme>
+  <p style={{ fontFamily: "Arial" }}>Primary button with modifiers</p>
+  <PrimaryButton
+    modifiers={[
+      select("Size", ["small", "large"]),
+      select("Status", ["warning", "error", "success"])
+    ]}
+    disabled={boolean("Disabled", false)}
+    onClick={action("clicked")}
+  >
+    Primary button
+  </PrimaryButton>
+</Theme>
 ```
+
+Now when you change the knobs, the second primary button should change to reflect it.
+
+![Knobs](images/storybook-modifiers.png)
 
 ### Accessibility
 
@@ -291,11 +314,102 @@ export default {
 
 And now you can see the accessibility panel appear in Storybook.
 
+![Accessibility](images/a11y.png)
+
 ## Activity
 
 Now it's your turn. Go ahead and add stories for your secondary and tertiary buttons as well as your modal.
 
 Storybook is a great way to find bugs in your corner-cases! If you find any bugs in your CSS, go ahead and fix them!
+
+### Activity Solution
+
+```jsx
+export const Secondary = () => (
+  <Theme>
+    <p style={{ fontFamily: "Arial" }}>Default secondary button</p>
+    <SecondaryButton
+      style={{ marginBottom: "50px" }}
+      onClick={action("clicked")}
+    >
+      Secondary button
+    </SecondaryButton>
+    <br />
+    <p style={{ fontFamily: "Arial" }}>Secondary button with modifiers</p>
+    <SecondaryButton
+      modifiers={[
+        select("Size", ["small", "large"]),
+        select("Status", ["warning", "error", "success"])
+      ]}
+      disabled={boolean("Disabled", false)}
+      onClick={action("clicked")}
+    >
+      Secondary button
+    </SecondaryButton>
+  </Theme>
+);
+
+export const Tertiary = () => (
+  <Theme>
+    <p style={{ fontFamily: "Arial" }}>Default tertiary button</p>
+    <TertiaryButton
+      style={{ marginBottom: "50px" }}
+      onClick={action("clicked")}
+    >
+      Tertiary button
+    </TertiaryButton>
+    <br />
+    <p style={{ fontFamily: "Arial" }}>Tertiary button with modifiers</p>
+    <TertiaryButton
+      modifiers={[
+        select("Size", ["small", "large"]),
+        select("Status", ["warning", "error", "success"])
+      ]}
+      disabled={boolean("Disabled", false)}
+      onClick={action("clicked")}
+    >
+      Tertiary button
+    </TertiaryButton>
+  </Theme>
+);
+```
+
+For the modals don't forget to pass state!
+
+```jsx
+import React, { useContext } from "react";
+import { withKnobs } from "@storybook/addon-knobs";
+import { withA11y } from "@storybook/addon-a11y";
+import { SignInModal, SignUpModal } from "../components/";
+import { ThemeProvider, ThemeContext } from "styled-components";
+import { defaultTheme } from "../utils";
+
+const Theme = ({ children }) => {
+  useContext(ThemeContext);
+  return children;
+};
+
+export default {
+  title: "Modals",
+  decorators: [
+    storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>,
+    withKnobs,
+    withA11y
+  ]
+};
+
+export const SignUp = () => (
+  <Theme>
+    <SignUpModal showModal={true} setShowModal={null} />
+  </Theme>
+);
+
+export const SignIn = () => (
+  <Theme>
+    <SignInModal showModal={true} setShowModal={null} />
+  </Theme>
+);
+```
 
 ## Customizing Storybook
 

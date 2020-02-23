@@ -269,14 +269,14 @@ yarn add react-spring
 
 Let's first create the state we'll need to show and hide the modal.
 
-Inside `index.js` let's create new state called `showModal`. Then let's add a button underneath the theme switcher buttons which will toggle the visibility of our modal.
+Inside `index.js` let's create new state called `showModal`. Then let's add a button underneath the theme switcher buttons which will toggle the visibility of our modal. You can add this underneath the theme switcher buttons.
 
 ```jsx
 const [showModal, setShowModal] = useState(false);
 
 ...
 
-<button onClick={() => setShowModal(!showModal)}>Show modal</button>
+<SecondaryButton onClick={() => setShowModal(!showModal)}>Show modal</SecondaryButton>
 ```
 
 Lastly, let's pass `showModal` and `setShowModal` as properties to our `SignUpModal` component.
@@ -293,7 +293,7 @@ export const SignUpModal = ({ showModal, setShowModal }) => {
 
 We'll use `react-spring` to show and hide our modal.
 
-Import `animated` and `useSpring` from `react-spring`.
+Import `animated`, `useSpring`, and `config` from `react-spring`.
 
 ```jsx
 import { useSpring, animated, config } from "react-spring";
@@ -330,12 +330,6 @@ Lastly, let's wrap `WrapperModal` in an `animated.div` element and pass our anim
 
 Finally let's use the `react-spring` config to slow down the animation.
 
-Import `config` from `react-spring`.
-
-```jsx
-import { useSpring, animated, config } from "react-spring";
-```
-
 Now we can add it as property in the `useSpring` definition. We'll use the `slow` configuration.
 
 ```jsx
@@ -344,4 +338,60 @@ const animation = useSpring({
   transform: showModal ? `translateY(0)` : `translateY(-200%)`,
   config: config.slow
 });
+```
+
+If we go back to the UI and click 'Show modal' we should see our modal animating in.
+
+Go ahead add the anmimation to your other modal.
+
+### Modal Activity Solution
+
+First I extracted out the `useSpring` config to a function which will return our modal animation object.
+
+```jsx
+const getAnimation = showModal => {
+  return {
+    config: config.slow,
+    opacity: showModal ? 1 : 0,
+    transform: showModal ? `translateY(0)` : `translateY(-200%)`
+  };
+};
+```
+
+Next I refactored the `SignUp` modal to use this helper function.
+
+```jsx
+export const SignUpModal = ({ showModal, setShowModal }) => {
+  return (
+    <animated.div style={useSpring(getAnimation(showModal))}>
+```
+
+Now I just followed the same process for my second `SignIn` modal.
+
+```jsx
+export const SignInModal = ({ showModal, setShowModal }) => (
+  <animated.div style={useSpring(getAnimation(showModal))}>
+    <ModalWrapper
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around"
+      }}
+    >
+      <div>
+        <ModalHeader>Sign In</ModalHeader>
+        <EmailInput label="Email" placeholder="emmabostian@gmail.com" />
+        <PasswordInput label="Password" />
+        <SecondaryButton style={{ margin: "16px 16px 0 0" }}>
+          Sign Up
+        </SecondaryButton>
+        <PrimaryButton>Sign In</PrimaryButton>
+      </div>
+      <SignIn />
+      <CloseModalButton onClick={() => setShowModal(false)}>
+        <CloseIcon />
+      </CloseModalButton>
+    </ModalWrapper>
+  </animated.div>
+);
 ```

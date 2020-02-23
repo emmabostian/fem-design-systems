@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { typeScale } from "../utils";
+import { typeScale, primaryFont } from "../utils";
 
 const Input = styled.input`
   width: 316px;
@@ -8,6 +8,7 @@ const Input = styled.input`
   background-color: ${props => props.theme.textFieldBackground};
   border: none;
   padding-left: 8px;
+  font-family: ${primaryFont};
   border-radius: 2px;
 `;
 
@@ -18,14 +19,14 @@ const Label = styled.label`
 `;
 
 export const EmailInput = ({ label, placeholder }) => (
-  <div style={{ display: "flex", flexDirection: "column" }}>
+  <div style={{ display: "flex", flexDirection: "column", marginTop: "16px" }}>
     <Label>{label}</Label>
     <Input type="email" placeholder={placeholder} />
   </div>
 );
 
 export const PasswordInput = ({ label, placeholder }) => (
-  <div style={{ display: "flex", flexDirection: "column" }}>
+  <div style={{ display: "flex", flexDirection: "column", marginTop: "16px" }}>
     <Label>{label}</Label>
     <Input type="password" />
   </div>

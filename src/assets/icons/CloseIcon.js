@@ -2,11 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const CloseIconWrapper = styled.svg`
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  width: 24px;
-  height: 24px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const CloseIcon = () => (

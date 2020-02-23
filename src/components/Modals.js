@@ -1,20 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { typeScale } from "../utils";
-import { PrimaryButton } from "./Buttons";
-import { SignUp, CloseIcon } from "../assets";
-import { useSpring, animated, config } from "react-spring";
+import { animated, useSpring, config } from "react-spring";
+import { typeScale, primaryFont } from "../utils";
+import { SignUp, CloseIcon, SignIn } from "../assets";
+import { PrimaryButton, SecondaryButton } from "./Buttons";
+import { EmailInput, PasswordInput } from "./TextFields";
 
-const CloseModalButton = styled.button`
-  cursor: pointer;
-  background: none;
-  border: none;
-`;
+const getAnimation = showModal => {
+  return {
+    config: config.slow,
+    opacity: showModal ? 1 : 0,
+    transform: showModal ? `translateY(0)` : `translateY(-200%)`
+  };
+};
 
 const ModalWrapper = styled.div`
   width: 800px;
   height: 500px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  font-family: ${primaryFont};
   background-color: ${props => props.theme.formElementBackground};
   color: ${props => props.theme.textColor};
   display: flex;
@@ -25,27 +29,34 @@ const ModalWrapper = styled.div`
   border-radius: 2px;
 `;
 
-const SignUpHeader = styled.h3`
+const ModalHeader = styled.h3`
   font-size: ${typeScale.header3};
 `;
 
 const SignUpText = styled.p`
-font-size: ${typeScale.paragraph}
+  font-size:: ${typeScale.paragraph};
   max-width: 70%;
   text-align: center;
 `;
 
+const CloseModalButton = styled.button`
+  cursor: pointer;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+`;
+
 export const SignUpModal = ({ showModal, setShowModal }) => {
-  const animation = useSpring({
-    opacity: showModal ? 1 : 0,
-    transform: showModal ? `translateY(0)` : `translateY(-200%)`,
-    config: config.slow
-  });
   return (
-    <animated.div style={animation}>
+    <animated.div style={useSpring(getAnimation(showModal))}>
       <ModalWrapper>
         <SignUp />
-        <SignUpHeader>Sign Up</SignUpHeader>
+        <ModalHeader>Sign Up</ModalHeader>
         <SignUpText>
           Sign up today to get access to all of our content and features!
         </SignUpText>
@@ -59,3 +70,29 @@ export const SignUpModal = ({ showModal, setShowModal }) => {
     </animated.div>
   );
 };
+
+export const SignInModal = ({ showModal, setShowModal }) => (
+  <animated.div style={useSpring(getAnimation(showModal))}>
+    <ModalWrapper
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around"
+      }}
+    >
+      <div>
+        <ModalHeader>Sign In</ModalHeader>
+        <EmailInput label="Email" placeholder="emmabostian@gmail.com" />
+        <PasswordInput label="Password" />
+        <SecondaryButton style={{ margin: "16px 16px 0 0" }}>
+          Sign Up
+        </SecondaryButton>
+        <PrimaryButton>Sign In</PrimaryButton>
+      </div>
+      <SignIn />
+      <CloseModalButton onClick={() => setShowModal(false)}>
+        <CloseIcon />
+      </CloseModalButton>
+    </ModalWrapper>
+  </animated.div>
+);

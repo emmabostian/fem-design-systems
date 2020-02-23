@@ -2,11 +2,7 @@ import React, { useContext } from "react";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { withA11y } from "@storybook/addon-a11y";
-import {
-  PrimaryButton,
-  SecondaryButton,
-  TertiaryButton
-} from "../components/Buttons";
+import { PrimaryButton, SecondaryButton, TertiaryButton } from "../components";
 import { ThemeProvider, ThemeContext } from "styled-components";
 import { defaultTheme } from "../utils";
 

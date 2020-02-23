@@ -65,6 +65,8 @@ export const Button = styled.button`
   }
 
   &:focus {
+    outline: 3px solid ${props => props.theme.primaryHoverColor};
+    outline-offset: 2px;
   }
 
   &:active {

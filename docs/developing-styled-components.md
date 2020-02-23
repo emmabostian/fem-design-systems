@@ -549,6 +549,8 @@ const Button = styled.button`
   }
 
   &:focus {
+    outline: 3px solid ${props => props.theme.primaryHoverColor};
+    outline-offset: 2px;
   }
 
   &:active {
@@ -734,6 +736,8 @@ const BUTTON_MODIFIERS = {
 
     &:hover, &:focus {
       background-color: ${defaultTheme.warningColorHover};
+      outline: 3px solid ${props => props.theme.warningColorHover};
+      outline-offset: 2px;
     }
 
     &:active {
@@ -852,12 +856,12 @@ You can also use one if you prefer simply toggling the state instead of being ex
 return (
 	  <ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<PrimaryButton
-        style={{ marginRight: "20px" }}
+        style={{ margin: "0 16px" }}
         onClick={() => setUseDarkTheme(true)}
       >
         Dark theme
       </PrimaryButton>
-      <PrimaryButton onClick={() => setUseDarkTheme(false)}>
+      <PrimaryButton style={{ margin: "0 16px" }} onClick={() => setUseDarkTheme(false)}>
         Default theme
       </PrimaryButton>
       ...
@@ -880,12 +884,15 @@ const App = () => {
   return (
     <ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
       <PrimaryButton
-        style={{ marginRight: "20px" }}
+        style={{ margin: "0 16px" }}
         onClick={() => setUseDarkTheme(true)}
       >
         Dark theme
       </PrimaryButton>
-      <PrimaryButton onClick={() => setUseDarkTheme(false)}>
+      <PrimaryButton
+        style={{ margin: "0 16px" }}
+        onClick={() => setUseDarkTheme(false)}
+      >
         Default theme
       </PrimaryButton>
       <div
@@ -940,6 +947,8 @@ const BUTTON_MODIFIERS = {
 
     &:hover, &:focus {
       background-color: ${theme.warningColorHover};
+      outline: 3px solid ${props => props.theme.warningColorHover};
+      outline-offset: 2px;
     }
 
     &:active {
@@ -989,6 +998,8 @@ const Button = styled.button`
   }
 
   &:focus {
+    outline: 3px solid ${props => props.theme.primaryHoverColor};
+    outline-offset: 2px;
   }
 
   &:active {

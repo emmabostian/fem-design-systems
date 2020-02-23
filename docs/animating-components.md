@@ -276,7 +276,7 @@ const [showModal, setShowModal] = useState(false);
 
 ...
 
-<SecondaryButton onClick={() => setShowModal(!showModal)}>Show modal</SecondaryButton>
+<PrimaryButton style={{ margin: "0 16px" }} onClick={() => setShowModal(!showModal)}>Show modal</PrimaryButton>
 ```
 
 Lastly, let's pass `showModal` and `setShowModal` as properties to our `SignUpModal` component.

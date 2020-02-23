@@ -10,13 +10,22 @@ const App = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
-      <PrimaryButton onClick={() => setUseDarkTheme(true)}>
+      <PrimaryButton
+        style={{ margin: "0 16px" }}
+        onClick={() => setUseDarkTheme(true)}
+      >
         Dark theme
       </PrimaryButton>
-      <PrimaryButton onClick={() => setUseDarkTheme(false)}>
+      <PrimaryButton
+        style={{ margin: "0 16px" }}
+        onClick={() => setUseDarkTheme(false)}
+      >
         Default theme
       </PrimaryButton>
-      <PrimaryButton onClick={() => setShowModal(!showModal)}>
+      <PrimaryButton
+        style={{ margin: "0 16px" }}
+        onClick={() => setShowModal(!showModal)}
+      >
         Show modal
       </PrimaryButton>
       <div

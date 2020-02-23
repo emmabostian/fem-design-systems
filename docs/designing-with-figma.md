@@ -115,7 +115,7 @@ For example, `32px` of padding on the left and right side of the button with a `
 
 Let's design our default primary, secondary, and tertiary buttons.
 
-I've created a Figma starter kit for you to copy. You can grab it [here](), copy and paste it into a new project.
+I've created a Figma starter kit for you to copy. You can grab it [here](https://www.figma.com/file/FUgY11amAHtmR2zyiHcSYs/FEM-Template?node-id=0%3A1), copy and paste it into a new project.
 
 Our primary button will be a filled button which uses our primary color (primary-300) and will use either black or white text depending upon color contrast ratios.
 

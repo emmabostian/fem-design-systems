@@ -1053,7 +1053,7 @@ export default PrimaryButton;
 
 Now we can dynamically style our components for the theme.
 
-Lastly let's change `PrimaryButton to also be a named export. This way we can import it as the default component or explicitly with a named import`{ PrimaryButtton }`.
+Lastly let's change `PrimaryButton` to also be a named export. This way we can import it as the default component or explicitly with a named import `{ PrimaryButtton }`.
 
 If you toggle the state you should see our theme working! You may also find some bugs during the theme toggle but you can fix those later.
 

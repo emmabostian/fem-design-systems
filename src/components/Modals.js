@@ -34,7 +34,7 @@ const ModalHeader = styled.h3`
 `;
 
 const SignUpText = styled.p`
-  font-size:: ${typeScale.paragraph};
+  font-size: ${typeScale.paragraph};
   max-width: 70%;
   text-align: center;
 `;

@@ -20,14 +20,14 @@ const Label = styled.label`
 
 export const EmailInput = ({ label, placeholder }) => (
   <div style={{ display: "flex", flexDirection: "column", marginTop: "16px" }}>
-    <Label>{label}</Label>
-    <Input type="email" placeholder={placeholder} />
+    <Label htmlFor="email">{label}</Label>
+    <Input id="email" type="email" placeholder={placeholder} />
   </div>
 );
 
 export const PasswordInput = ({ label, placeholder }) => (
   <div style={{ display: "flex", flexDirection: "column", marginTop: "16px" }}>
-    <Label>{label}</Label>
-    <Input type="password" />
+    <Label htmlFor="password">{label}</Label>
+    <Input id="password" type="password" placeholder={placeholder} />
   </div>
 );

@@ -178,8 +178,6 @@ And that's just one team creating this library.
 
 If your enterprise company has 50 teams each designing, building, and testing buttons, that's a grand total of \$1 million you're spending on buttons.
 
-If your enterprise company has 50 teams each designing, building, and testing buttons, that's a grand total of \$1 million you're spending on buttons.
-
 And since they're all being built by different teams, you can bet that the quality will vary with each version.
 
 This is why you need a design system.

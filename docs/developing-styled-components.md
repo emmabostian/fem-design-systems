@@ -193,7 +193,7 @@ const Button = styled.button`
   font-family: "Roboto Mono", monospace;
 `;
 
-const PrimaryButton = styled.Button`
+const PrimaryButton = styled(Button)`
   background-color: red;
   border: none;
   color: white;

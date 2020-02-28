@@ -24,7 +24,6 @@ Inside `Button.stories.js` change the content to the following:
 
 ```jsx
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import {
   PrimaryButton,
   SecondaryButton,
@@ -36,17 +35,17 @@ export default {
 };
 
 export const Primary = () => (
-  <PrimaryButton onClick={action("clicked")}>Primary Button</PrimaryButton>
+  <PrimaryButton>Primary Button</PrimaryButton>
 );
 
 export const Secondary = () => (
-  <SecondaryButton onClick={action("clicked")}>
+  <SecondaryButton>
     Secondary Button
   </SecondaryButton>
 );
 
 export const Tertiary = () => (
-  <TertiaryButton onClick={action("clicked")}>Tertiary Button</TertiaryButton>
+  <TertiaryButton>Tertiary Button</TertiaryButton>
 );
 ```
 
@@ -58,18 +57,15 @@ This is because our buttons rely on a theme prop to be passed with `ThemeProvide
 
 ## Passing Themes To Storybook Components
 
-Inside `Button.stories.js` let's import a few additional things.
+Inside `Button.stories.js` let's first import a few additional things.
 
 ```jsx
-import React, { useContext } from "react";
+/* underneath react and buttons import statements */
 import { ThemeProvider, ThemeContext } from "styled-components";
 import { defaultTheme } from "../utils";
-import { storiesOf } from "@storybook/react";
 ```
 
-First let's delete everything underneath the imports. We'll can use the `storiesOf` function to create stories, instead of explicitly exporting each individually.
-
-Next create a `Theme` variable which will create context for our theme.
+Then, we'll create a `Theme` variable which will create context for our theme.
 
 ```jsx
 const Theme = ({ children }) => {
@@ -78,64 +74,20 @@ const Theme = ({ children }) => {
 };
 ```
 
-Now let's create our button stories.
-
-```jsx
-storiesOf("Button");
-```
-
-Now let's add a decorator. Decorators are wrapper components or Storybook decorators that wrap a story. Since we want to wrap our components in a theme, we'll use a decorator to do so with our newly created `Theme` constant.
-
-We'll pass it our `defaultTheme` which we imported above, and then call `storyFn()` to inject the stories.
-
-```jsx
-storiesOf("Button").addDecorator(storyFn => (
-  <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
-));
-```
-
-Now, we can simply `add` stories for our buttons.
-
-```jsx
-storiesOf("Button")
-  .addDecorator(storyFn => (
-    <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
-  ))
-  .add("Primary", () => (
-    <Theme>
-      <PrimaryButton>Primary Button</PrimaryButton>
-    </Theme>
-  ))
-  .add("Secondary", () => (
-    <Theme>
-      <SecondaryButton>Secondary Button</SecondaryButton>
-    </Theme>
-  ))
-  .add("Tertiary", () => (
-    <Theme>
-      <TertiaryButton>Tertiary Button</TertiaryButton>
-    </Theme>
-  ));
-```
-
-Your button should now be rendering with the appropriate theme!
-
-![Storybook](images/storybook-2.png)
-
-This is a bit verbose so let's refactor it.
-
-Underneath the `Theme` variable declaration, let's create a default export for this component. This will define our decorator so we don't have to use the `storiesOf` operator.
+Next, we'll tell storybook how we'd like our yet-to-be-created stories to be scaffolded.
 
 ```jsx
 export default {
+  // Place all of this stories in this file inside of a "Buttons" folder
   title: "Buttons",
+  // Wrap (decorate) our stories with our ThemeProvider using our default theme
   decorators: [
     storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
   ]
 };
 ```
 
-Now we can simply export individual stories for each button as opposed to chaining them with `.add`.
+Now let's use our Theme component alongside our button stories.
 
 ```jsx
 export const Primary = () => (
@@ -157,8 +109,7 @@ export const Tertiary = () => (
 );
 ```
 
-Your UI should still be working as expected.
-
+Now your UI should be appearing as expected.
 ## Addons
 
 Addons are neat packages you can install and use with Storybook to gain additional functionality.
@@ -261,7 +212,7 @@ Then we can add the `disabled` state and set it to a `boolean` initialized to `f
     onClick={action("clicked")}
   >
     Primary button
-  </PrimaryButton>
+  </TertiaryButton>
 </Theme>
 ```
 

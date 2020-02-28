@@ -68,7 +68,7 @@ Triadic color palettes are created by selecting three evenly-spaced colors from 
 
 Primary colors on the RGB color wheel are colors which, when combined, create pure white light. These are red, green, and blue.
 
-In the RYB color wheel primary colors are colors which cannot be creating by combing other colors. These are red, yellow, and blue.
+In the RYB color wheel primary colors are colors which cannot be created by combining other colors. These are red, yellow, and blue.
 
 #### Secondary Colors
 
@@ -326,7 +326,7 @@ You can calculate pixels from REM by multiplying the REM value by the pixel base
 
 **Em** is the unit of typography equal to the currently specified point-size. `1em` can compute to different values depending upon where you are in the code.
 
-Ems perform in a similar fashion to REM, until it comes too nesting.
+Ems perform in a similar fashion to REM, until it comes to nesting.
 
 If you have a `div` with a font-size of `2em`, then you nest a `p` with a font-size of `2em`, the font-size of the paragraph is now `2em` relative to the `div`.
 

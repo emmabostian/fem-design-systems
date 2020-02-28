@@ -26,7 +26,7 @@ But a design system encompasses all of these things: design language, UI Kit, co
 
 ## Why Design Systems Matter
 
-Design systems allow companies to define their own brand identity and make it into accessible, consistent, and re-usable components, and this comes with many benefits.
+Design systems allow companies to define their own brand identity and bake it into accessible, consistent, and re-usable components, and this comes with many benefits.
 
 ### Accessibility
 

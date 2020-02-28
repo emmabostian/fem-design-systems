@@ -14,7 +14,7 @@ Some of the topics and technologies we'll cover include:
 - [Developing styled components](developing-styled-components.md)
 - [Animating components with react-spring](animating-components.md)
 - [Documenting components with Storybook](documenting-components-with-storybook.md)
-- [Tooling & resources](tooling-and-resources.md)
+- [Tooling & resources](tools-and-resources.md)
 
 You should create an account on [Figma](https://www.figma.com/). This is where we'll be designing our color palette, typography, and components.
 

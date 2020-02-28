@@ -119,6 +119,10 @@ Addons are neat packages you can install and use with Storybook to gain addition
 We can also use the `action` function from `storybook/addon-actions` to dispatch actions when our button is clicked. This will simply log the event in the Storybook console.
 
 ```jsx
+
+// Add a new import
+import { action } from "@storybook/addon-actions";
+
 export const Primary = () => (
   <Theme>
     <PrimaryButton onClick={action("click")}>Primary button</PrimaryButton>

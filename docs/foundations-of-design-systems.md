@@ -62,7 +62,7 @@ Additionally, design systems facilitate better cross-squad collaboration. If all
 
 ### Flexibility
 
-Flexibility. And you're probably a bit confused by this as I've just harped on the importance of consistency. But design systems must be flexible and provide serve different teams and different use cases. However they must establish boundaries within which teams can customize.
+Flexibility. And you're probably a bit confused by this as I've just harped on the importance of consistency. But design systems must be flexible and serve different teams and different use cases. However they must establish boundaries within which teams can customize.
 
 We need variations of our components such as small, medium, and large sized buttons or buttons with icons. A design system must serve a variety of use cases, while setting parameters on what exactly those use cases can be.
 
@@ -86,7 +86,7 @@ A design system is never complete. It isn't a project with a finite end date; it
 
 ### Maintenance
 
-A design system is not a project with a release date. A design system is a living, breathing product which has lifecycles and requires maintenance.
+A design system is a living, breathing product which has lifecycles and requires maintenance.
 
 And we cannot build a design system without a team.
 
@@ -162,7 +162,7 @@ And we can't forget about icons! We need primary, secondary, and tertiary button
 
 We also can't forget about light and dark themes. Many enterprise products will have a variation on color palette, so our buttons must work across all themes.
 
-OH and we may need different sized buttons.
+OH, and we may need different sized buttons!
 
 And now, we're finally complete. At least we're complete with the design.
 
@@ -223,7 +223,7 @@ Perhaps you just need component documentation, so publishing your Storybook site
 
 Or maybe you want a fully-fledged website.
 
-Gatsby is a great option, if you know React, and can be used to create beautiful style guides using markdown.
+Gatsby is a great option if you know React, and can be used to create beautiful style guides using markdown.
 
 The [Invision DSM](https://www.invisionapp.com/design-system-manager) is a CMS solution for creating a style guide if you don't have a ton of time or resources.
 
@@ -267,7 +267,7 @@ Some questions you may want to ask are:
 - Does this request coincide with our product roadmap?
 - Does this request require a lot of maintenance?
 - Does this request improve the user experience of our products?
-- Are we confident in this request or will it need to be revisited agin in the near future?
+- Are we confident in this request or will it need to be revisited again in the near future?
 - Is this request technically feasible?
 
 We can take these questions and turn them into impact statements.
@@ -314,7 +314,7 @@ All users, regardless of circumstance, must be able to accomplish the same tasks
 
 #### Interaction
 
-How should a component react when a user interacts with it? Is there validation feedback that must occur? The interaction definition must be defined.
+How should a component respond when a user interacts with it? Is there validation feedback that must occur? The interaction definition must be defined.
 
 #### Context
 

@@ -100,7 +100,7 @@ Luminance is the amount of brightness, or light, in a color.
 
 #### Shade
 
-A shade is created by incorporating black to a base huge, which darkens the color.
+A shade is created by incorporating black to a base hue, which darkens the color.
 
 #### Tint
 
@@ -148,7 +148,7 @@ Black has long been associated with power, elegance and formality, but can also 
 
 #### White
 
-White is associated with purity, cleanliness, virtue an is typically seen used for healthcare websites. White can also represent goodness and angels.
+White is associated with purity, cleanliness, virtue and is typically seen used for healthcare websites. White can also represent goodness and angels.
 
 #### Gray
 
@@ -199,7 +199,7 @@ I chose the palette:
 #8D53D2
 #742DC8
 #5F25A4
-#41A1D0
+#050449
 ```
 
 In your art board, create five 200 x 200 squares. You can create one and command + v to copy and paste, or press and hold option while dragging the shape to make a copy.
@@ -326,7 +326,7 @@ You can calculate pixels from REM by multiplying the REM value by the pixel base
 
 **Em** is the unit of typography equal to the currently specified point-size. `1em` can compute to different values depending upon where you are in the code.
 
-Ems perform in a similar fashion to REM, until it comes too nesting.
+Ems perform in a similar fashion to REM, until it comes to nesting.
 
 If you have a `div` with a font-size of `2em`, then you nest a `p` with a font-size of `2em`, the font-size of the paragraph is now `2em` relative to the `div`.
 
@@ -348,7 +348,7 @@ There are several scales to choose from when building an application. Here are s
 
 Let's head back to our Figma project and create a new page called Typography.
 
-Press 'A' to add a new dartboard and name it 'Type Scale'.
+Press 'A' to add a new artboard and name it 'Type Scale'.
 
 Head to the [Google fonts website](https://fonts.google.com/) and find a font family for your design system.
 

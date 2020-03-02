@@ -18,7 +18,7 @@ Design systems allow us to create a cohesive experience throughout every leg of 
 
 There is no industry definition for a design system, which can make it a bit tricky to understand.
 
-If you hear a designer say design system, they're most likely referring to the design language and UI kit.
+If you hear a designer say design system, they're most likely referring to the design language and UI Kit.
 
 If you hear a developer say design system, they're probably referring to the component library or style guide.
 
@@ -110,7 +110,7 @@ They will
 
 - Define the foundation & identity of the system
 - Have veto power over the system
-- Manage & create the UI kit, component library, and style guide
+- Manage & create the UI Kit, component library, and style guide
 
 The team structure is cross-disciplined. You'll need members from design, engineering, and product in order to build a sustainable and scalable system.
 
@@ -215,7 +215,7 @@ Component libraries can be built with many different frameworks and libraries (s
 
 ### Style Guide
 
-The style guide is the documentation for the design language, UI kit, and component library.
+The style guide is the documentation for the design language, UI Kit, and component library.
 
 There are many different ways to build a style guide.
 

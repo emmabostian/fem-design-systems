@@ -180,7 +180,7 @@ You can choose the button styles that you like (filled versus ghost, border radi
 
 We will use the save icon from [The Noun Project](https://thenounproject.com/search/?q=save&i=2209758) to create our icon buttons. Click 'Get this icon' and select basic download. Then download the SVG. You can drag the downloaded SVG into Figma.
 
-Take the next 30 minutes and design your buttons in Sigma
+Take the next 30 minutes and design your buttons in Figma.
 
 Once completed, right click on your default elements (primary, secondary, tertiary, etc.) and click "Create component." You can also select the component and type "option + command + k" on a Mac as a shortcut.
 

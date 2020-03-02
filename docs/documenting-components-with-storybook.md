@@ -16,15 +16,16 @@ This will create a `.storybook` directory in the root of your project.
 
 It will also create a `stories/` directory inside of the `src/` folder. If we expand it, we'll see `0-Welcome.stories.js` and `1-Button.stories.js`.
 
-Run `yarn storybook` to start your development server.
+Run `npm run storybook` to start your development server.
 
-We can delete the `0-Welcome.stories.js` file and rename the `1-Button.stories.js` file to `Button.stories.js`.
+We can delete the `0-Welcome.stories.js` file and rename the `1-Button.stories.js` file to `Button.stories.js`. Let's move this file into the `components/` directory so it's close to it's component. We can then delete the `stories/` folder entirely.
+
+Storybook creates the `stories/` folder initially because it isn't aware of your project architecture. But we're aware of it so let's refactor.
 
 Inside `Button.stories.js` change the content to the following:
 
 ```jsx
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import {
   PrimaryButton,
   SecondaryButton,
@@ -35,19 +36,13 @@ export default {
   title: "Buttons"
 };
 
-export const Primary = () => (
-  <PrimaryButton onClick={action("clicked")}>Primary Button</PrimaryButton>
-);
+export const Primary = () => <PrimaryButton>Primary Button</PrimaryButton>;
 
 export const Secondary = () => (
-  <SecondaryButton onClick={action("clicked")}>
-    Secondary Button
-  </SecondaryButton>
+  <SecondaryButton>Secondary Button</SecondaryButton>
 );
 
-export const Tertiary = () => (
-  <TertiaryButton onClick={action("clicked")}>Tertiary Button</TertiaryButton>
-);
+export const Tertiary = () => <TertiaryButton>Tertiary Button</TertiaryButton>;
 ```
 
 If you go back to the UI we can see it's rendering a button but it isn't styled appropriately.
@@ -56,86 +51,53 @@ This is because our buttons rely on a theme prop to be passed with `ThemeProvide
 
 ![Storybook](images/storybook.png)
 
+## Adding Decorators
+
+We'll add our decorators to a new file, `manager.js` inside of `.storybook/` so each of our components inherits these decorators instead of having to manually include them in each component story.
+
+Create `manager.js` and add the following:
+
+```js
+import { addons } from "@storybook/addons";
+import { ThemeProvider } from "styled-components";
+import { defaultTheme } from "../src/utils/";
+
+addons.setConfig({
+  decorators: [
+    storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
+  ]
+});
+```
+
+Now if we go back to our components, they should be rendering correctly.
+
 ## Passing Themes To Storybook Components
 
 Inside `Button.stories.js` let's import a few additional things.
 
 ```jsx
 import React, { useContext } from "react";
-import { ThemeProvider, ThemeContext } from "styled-components";
-import { defaultTheme } from "../utils";
-import { storiesOf } from "@storybook/react";
+import { ThemeContext } from "styled-components";
 ```
 
-First let's delete everything underneath the imports. We'll can use the `storiesOf` function to create stories, instead of explicitly exporting each individually.
+We need to declare our `Theme` component which will wrap our buttons. This will use the `useContext` hook from React.
 
-Next create a `Theme` variable which will create context for our theme.
-
-```jsx
+```js
 const Theme = ({ children }) => {
   useContext(ThemeContext);
   return children;
 };
 ```
 
-Now let's create our button stories.
-
-```jsx
-storiesOf("Button");
-```
-
-Now let's add a decorator. Decorators are wrapper components or Storybook decorators that wrap a story. Since we want to wrap our components in a theme, we'll use a decorator to do so with our newly created `Theme` constant.
-
-We'll pass it our `defaultTheme` which we imported above, and then call `storyFn()` to inject the stories.
-
-```jsx
-storiesOf("Button").addDecorator(storyFn => (
-  <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
-));
-```
-
-Now, we can simply `add` stories for our buttons.
-
-```jsx
-storiesOf("Button")
-  .addDecorator(storyFn => (
-    <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
-  ))
-  .add("Primary", () => (
-    <Theme>
-      <PrimaryButton>Primary Button</PrimaryButton>
-    </Theme>
-  ))
-  .add("Secondary", () => (
-    <Theme>
-      <SecondaryButton>Secondary Button</SecondaryButton>
-    </Theme>
-  ))
-  .add("Tertiary", () => (
-    <Theme>
-      <TertiaryButton>Tertiary Button</TertiaryButton>
-    </Theme>
-  ));
-```
-
-Your button should now be rendering with the appropriate theme!
-
-![Storybook](images/storybook-2.png)
-
-This is a bit verbose so let's refactor it.
-
-Underneath the `Theme` variable declaration, let's create a default export for this component. This will define our decorator so we don't have to use the `storiesOf` operator.
+Underneath the `Theme` variable declaration, let's create a default export for this component which denotes the component title.
 
 ```jsx
 export default {
-  title: "Buttons",
-  decorators: [
-    storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
-  ]
+  title: "Buttons"
 };
 ```
 
-Now we can simply export individual stories for each button as opposed to chaining them with `.add`.
+Now we can simply export individual stories for each button.
 
 ```jsx
 export const Primary = () => (
@@ -167,6 +129,23 @@ Addons are neat packages you can install and use with Storybook to gain addition
 
 We can also use the `action` function from `storybook/addon-actions` to dispatch actions when our button is clicked. This will simply log the event in the Storybook console.
 
+Make sure `addon-actions` is installed (`npm i -D @storybook/addon-actions`) and added to our `addons` array in `main.js`.
+
+```js
+module.exports = {
+  stories: ["../src/**/*.stories.js"],
+  addons: ["@storybook/preset-create-react-app", "@storybook/addon-actions"]
+};
+```
+
+First import `action` addon to `Button.stories.js`.
+
+```js
+import { action } from "@storybook/addon-actions";
+```
+
+Then we can include it inside of an `onClick` handler.
+
 ```jsx
 export const Primary = () => (
   <Theme>
@@ -175,14 +154,33 @@ export const Primary = () => (
 );
 ```
 
+### Theme Switcher
+
+To switch the theme of our components we can use the `addon-contexts` add on.
+
+First install the add on with `npm`.
+
+```
+npm i -D @storybook/addon-contexts
+```
+
+Then add it to the array of addons in `main.js`.
+
+```js
+module.exports = {
+  stories: ["../src/**/*.stories.js"],
+  addons: [..."@storybook/addon-contexts"]
+};
+```
+
 ### Code Snippets
 
 Often you want to see the code snippets documented with your components. We can use the `story source` add-on to do this.
 
-First add the add-on as a dependency with `yarn`.
+First add the add-on as a development dependency with `npm`.
 
 ```jsx
-yarn add --dev  @storybook/addon-storysource
+npm i -D  @storybook/addon-storysource
 ```
 
 Next, add it to the `main.js` file in the `addons` array.
@@ -200,7 +198,7 @@ Knobs are a great add-on for testing all combinations of your components.
 Simply install the add-on.
 
 ```jsx
-yarn add --dev @storybook/addon-knobs
+npm i -D @storybook/addon-knobs
 ```
 
 And add it to your `addons` array in `main.js`.
@@ -274,7 +272,7 @@ Now when you change the knobs, the second primary button should change to reflec
 Now let's add an accessibility add-on. First add the package dependency.
 
 ```jsx
-yarn add @storybook/addon-a11y --dev
+npm i -D @storybook/addon-a11y
 ```
 
 Then add the add-on to the add-on array in `main.js`.
@@ -478,9 +476,27 @@ addons.setConfig({
 
 ```
 
-## Building Storybook
+## Deploying Storybook
 
-You can run `yarn build-storybook` to build your storybook documentation and then you can deploy it for all team members to use.
+You can run `npm run build-storybook` to build your storybook documentation and then you can deploy it for all team members to use.
+
+Once built, commit and push all of your repository code to the `master` branch.
+
+Next head over to [Netlify](https://www.netlify.com/) and log in, or sign up, with GitHub. Click New Site From Git and select GitHub for continuous deployment, then select your repository.
+
+Leave the owner as your default team, and the branch to deploy to `master`. Under Basic build settings, set the following arguments:
+
+```
+// Build command
+npm run build-storybook
+
+// Publish directory
+storybook-static/
+```
+
+![Create new site](images/create-new-site.png)
+
+Once the deploy has started, you can then head over to the site settings and change the site name. Netlify makes it super easy to add a custom domain with the Domain management panel. You can read more about adding a custom domain [here](https://docs.netlify.com/domains-https/custom-domains/).
 
 ## Resources
 

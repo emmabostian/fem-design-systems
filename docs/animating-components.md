@@ -341,7 +341,7 @@ The full list can be found [here](https://www.react-spring.io/docs/hooks/basics)
 First install `react-spring`
 
 ```jsx
-yarn add react-spring
+npm i react-spring
 ```
 
 Let's first create the state we'll need to show and hide the modal.
@@ -370,10 +370,10 @@ export const SignUpModal = ({ showModal, setShowModal }) => {
 
 We'll use `react-spring` to show and hide our modal.
 
-Import `animated`, `useSpring`, and `config` from `react-spring`.
+Import `animated` and `useSpring` from `react-spring`.
 
 ```jsx
-import { useSpring, animated, config } from "react-spring";
+import { useSpring, animated } from "react-spring";
 ```
 
 Now let's define our animation. We can use the hook state `showModal` to determine the styling of our modal.
@@ -405,7 +405,13 @@ Lastly, let's wrap `WrapperModal` in an `animated.div` element and pass our anim
 </animated.div>
 ```
 
-Finally let's use the `react-spring` config to slow down the animation.
+`react-spring` comes with a `config` which can be used to change the mass and tension of our components. Let's test it out.
+
+Import `config` from `react-spring`.
+
+```jsx
+import { useSpring, animated, config } from "react-spring";
+```
 
 Now we can add it as property in the `useSpring` definition. We'll use the `slow` configuration.
 
@@ -417,9 +423,9 @@ const animation = useSpring({
 });
 ```
 
-If we go back to the UI and click 'Show modal' we should see our modal animating in.
+If we go back to the UI and click 'Show modal' we should see our modal animating in. This is a bit slow for my liking so I'll remove it but `config` provides some nice configurations for your animations.
 
-Go ahead add the anmimation to your other modal.
+Now, go ahead add the anmimation to your other modal.
 
 ### Modal Activity Solution
 
@@ -428,7 +434,6 @@ First I extracted out the `useSpring` config to a function which will return our
 ```jsx
 const getAnimation = showModal => {
   return {
-    config: config.slow,
     opacity: showModal ? 1 : 0,
     transform: showModal ? `translateY(0)` : `translateY(-200%)`
   };

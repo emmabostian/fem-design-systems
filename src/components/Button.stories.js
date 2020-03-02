@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
+import { ThemeContext } from "styled-components";
 import { action } from "@storybook/addon-actions";
-import { withKnobs, select, boolean } from "@storybook/addon-knobs";
-import { withA11y } from "@storybook/addon-a11y";
-import { PrimaryButton, SecondaryButton, TertiaryButton } from "../components";
-import { ThemeProvider, ThemeContext } from "styled-components";
-import { defaultTheme } from "../utils";
+import { select, boolean } from "@storybook/addon-knobs";
+import { PrimaryButton, SecondaryButton, TertiaryButton } from ".";
 
 const Theme = ({ children }) => {
   useContext(ThemeContext);
@@ -12,12 +10,7 @@ const Theme = ({ children }) => {
 };
 
 export default {
-  title: "Buttons",
-  decorators: [
-    storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>,
-    withKnobs,
-    withA11y
-  ]
+  title: "Buttons"
 };
 
 export const Primary = () => (

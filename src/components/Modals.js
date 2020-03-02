@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { animated, useSpring, config } from "react-spring";
+import { animated, useSpring } from "react-spring";
 import { typeScale, primaryFont } from "../utils";
-import { SignUp, CloseIcon, SignIn } from "../assets";
+import { CloseIcon } from "../assets";
 import { PrimaryButton, SecondaryButton } from "./Buttons";
 import { EmailInput, PasswordInput } from "./TextFields";
+import SignIn from "../assets/illustrations/SignIn.svg";
+import SignUp from "../assets/illustrations/SignUp.svg";
 
 const getAnimation = showModal => {
   return {
-    config: config.slow,
     opacity: showModal ? 1 : 0,
     transform: showModal ? `translateY(0)` : `translateY(-200%)`
   };
@@ -20,7 +21,7 @@ const ModalWrapper = styled.div`
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   font-family: ${primaryFont};
   background-color: ${props => props.theme.formElementBackground};
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.textOnFormElementBackground};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,7 +56,7 @@ export const SignUpModal = ({ showModal, setShowModal }) => {
   return (
     <animated.div style={useSpring(getAnimation(showModal))}>
       <ModalWrapper>
-        <SignUp />
+        <img src={SignUp} alt="Sign up for an account!" />
         <ModalHeader>Sign Up</ModalHeader>
         <SignUpText>
           Sign up today to get access to all of our content and features!
@@ -89,7 +90,7 @@ export const SignInModal = ({ showModal, setShowModal }) => (
         </SecondaryButton>
         <PrimaryButton>Sign In</PrimaryButton>
       </div>
-      <SignIn />
+      <img src={SignIn} alt="Sign in to your account" />
       <CloseModalButton onClick={() => setShowModal(false)}>
         <CloseIcon />
       </CloseModalButton>

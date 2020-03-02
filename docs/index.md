@@ -39,3 +39,24 @@ This course is not a comprehensive overview to design systems. There is no indus
 ## Course Updates
 
 If you find any mistakes, feel free to open a PR on the [course repository](https://github.com/emmabostian/fem-design-systems).
+
+## Getting Started
+
+If you'd like to view the working app, follow the steps below.
+
+### Running the development server
+
+1. Clone this repo `git clone https://github.com/emmabostian/fem-design-systems.git`
+2. Install dependencies with `npm i`
+3. Start the development server `npm start`
+   _If you hit a "path argument must be of type string" error during build, make sure `react-scripts` is version `3.4.0`, delete `node_modules`, and re-install dependencies with `npm i`. You can read more abou this error [here](https://github.com/facebook/create-react-app/issues/8490)_.
+
+### Viewing the Storybook
+
+To view the Storybook, you can run it locally with the following steps.
+
+1. Clone this repo `git clone https://github.com/emmabostian/fem-design-systems.git`
+2. Install dependencies with `npm i`
+3. Start Storybook with `npm run storybook`.
+
+You can also visit the Netlify site [here](https://fem-design-systems-storybook.netlify.com/?path=/story/buttons--primary).

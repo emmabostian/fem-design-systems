@@ -348,7 +348,7 @@ There are several scales to choose from when building an application. Here are s
 
 Let's head back to our Figma project and create a new page called Typography.
 
-Press 'A' to add a new artboard and name it 'Type Scale'.
+Press 'A' to add a new art board and name it 'Type Scale'.
 
 Head to the [Google fonts website](https://fonts.google.com/) and find a font family for your design system.
 

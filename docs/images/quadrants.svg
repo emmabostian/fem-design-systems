@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="304" height="303" viewBox="0 0 304 303">
+  <g fill="none" fill-rule="evenodd">
+    <line x1="151.5" x2="151.5" y1=".5" y2="302.5" stroke="#979797" stroke-linecap="square"/>
+    <line x1="152" x2="152" y1="1" y2="303" stroke="#979797" stroke-linecap="square" transform="rotate(90 152 152)"/>
+    <rect width="147" height="144" x="156" y="1" fill="#030086"/>
+    <text fill="#FFF" font-family="OpenSans-Regular, Open Sans" font-size="20">
+      <tspan x="161" y="33">Priority 1</tspan>
+    </text>
+    <text fill="#FFF" font-family="OpenSans-Regular, Open Sans" font-size="9">
+      <tspan x="161" y="49">Strong adopter / weak opposer</tspan>
+    </text>
+    <rect width="147" height="144" y="1" fill="#312DDB"/>
+    <text fill="#FFF" font-family="OpenSans-Regular, Open Sans" font-size="20">
+      <tspan x="5" y="33">Priority 3</tspan>
+    </text>
+    <text fill="#FFF" font-family="OpenSans-Regular, Open Sans" font-size="9">
+      <tspan x="5" y="49">Weak adopter / weak opposer</tspan>
+    </text>
+    <rect width="147" height="144" y="158" fill="#4A4A4A"/>
+    <text fill="#FFF" font-family="OpenSans-Regular, Open Sans" font-size="20">
+      <tspan x="5" y="190">Parking lot</tspan>
+    </text>
+    <text fill="#FFF" font-family="OpenSans-Regular, Open Sans" font-size="9">
+      <tspan x="5" y="206">Weak adopter / strong opposer</tspan>
+    </text>
+    <rect width="147" height="144" x="156" y="159" fill="#2320BD"/>
+    <text fill="#FFF" font-family="OpenSans-Regular, Open Sans" font-size="20">
+      <tspan x="161" y="191">Priority 2</tspan>
+    </text>
+    <text fill="#FFF" font-family="OpenSans-Regular, Open Sans" font-size="9">
+      <tspan x="161" y="207">Strong adopter / strong opposer</tspan>
+    </text>
+    <text fill="#FFF" font-family="OpenSans-Italic, Open Sans" font-size="9" font-style="italic">
+      <tspan x="161" y="225">Try to mitigate the opposition </tspan> <tspan x="161" y="238">metrics prior to adopting.</tspan>
+    </text>
+    <text fill="#FFF" font-family="OpenSans-Italic, Open Sans" font-size="9" font-style="italic">
+      <tspan x="161" y="70">Immediate adoption.</tspan>
+    </text>
+    <text fill="#FFF" font-family="OpenSans-Italic, Open Sans" font-size="9" font-style="italic">
+      <tspan x="5" y="70">Finish priority one and two </tspan> <tspan x="5" y="83">components before tackling.</tspan>
+    </text>
+  </g>
+</svg>

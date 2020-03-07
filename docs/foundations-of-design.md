@@ -22,6 +22,10 @@ Additive colors start black and become white as more red, blue, or green are add
 
 TVs and computer monitors use additive color mixing. Every pixel begins as black and express color as a percentage of red, green, and blue.
 
+![Additive color mixing](images/additive-color-mixing.png)
+
+[View the original image](http://bit.ly/38vozMz)
+
 #### Subtractive Color Mixing (CYMK)
 
 While additive color mixing is created by adding colored light to black, subtractive colors are created by absorbing (subtracting) some light wavelengths and reflecting others.
@@ -30,9 +34,37 @@ Subtractive colors start as white and as filters are added takes on the appearan
 
 Photos and magazines use subtractive colors.
 
-### Color Combinations & The Color Wheel
+![Subtractive color mixing](images/subtractive-color-mixing.png)
 
-![Color wheel](https://static-cse.canva.com/_next/static/assets/complementary-colors.900x518.0c8111ad7fa081f48632ab6e0d753f5d.png)
+[View the original image](http://bit.ly/2TE2aag)
+
+### Color Types
+
+![Primary secondary and tertiary](color-terminology.svg)
+
+#### Primary Colors
+
+In the RYB color wheel primary colors are colors which cannot be created by combining other colors. These are red, yellow, and blue.
+
+![Primary](images/primary.svg)
+
+#### Secondary Colors
+
+Secondary colors result from mixing two primary colors. In the RGB color wheel, secondary colors are cyan, magenta, and yellow.
+
+In the RYB color wheel the secondary colors are purple, orange, and green.
+
+![Secondary](images/secondary.svg)
+
+#### Tertiary Colors
+
+Tertiary colors are created by combining a secondary color with a primary color. There are six tertiary colors.
+
+The tertiary colors are red-orange, yellow-orange, yellow-green, blue-green, blue-violet, and red-violet.
+
+![Tertiary](images/tertiary.svg)
+
+### The Color Wheel
 
 There are several types of color combinations which can be used to build color palettes.
 
@@ -42,11 +74,15 @@ Monochromatic palettes are created by establishing variations on a shade of a si
 
 ![Monochromatic](https://static-cse.canva.com/_next/static/assets/monochromatic-colors.900x518.bec7739a547bd1b3395e68c915d0901f.png)
 
+[View the source](http://bit.ly/2TE2aag)
+
 #### Complementary
 
 Complementary color palettes are created by selecting two colors directly opposite of each other on the color wheel.
 
 ![Complementary](https://static-cse.canva.com/_next/static/assets/complementary-colors.900x518.0c8111ad7fa081f48632ab6e0d753f5d.png)
+
+[View the source](http://bit.ly/2TE2aag)
 
 #### Analogous
 
@@ -54,63 +90,63 @@ Analogous color palettes are created by selecting three colors which are side by
 
 ![Analogous](https://static-cse.canva.com/_next/static/assets/analogous-colors.900x518.2ca117fb3c38f47d9a96430d28b7963c.png)
 
+[View the source](http://bit.ly/2TE2aag)
+
 #### Triadic
 
 Triadic color palettes are created by selecting three evenly-spaced colors from around the color wheel.
 
 ![Triadic](https://static-cse.canva.com/_next/static/assets/triadic-colors.900x518.fb18f980ea03a9fa43fb73c99c53e8c2.png)
 
+[View the source](http://bit.ly/2TE2aag)
+
 ### Color Terminology
 
-![Primary secondary and tertiary](https://static-cse.canva.com/_next/static/assets/primary-secondary-and-tertiary-colors.900x530.69aa321db399c314213115c01cfbfbba.png)
+![HSL](images/hue-saturation-light.svg)
 
-#### Primary Colors
-
-Primary colors on the RGB color wheel are colors which, when combined, create pure white light. These are red, green, and blue.
-
-In the RYB color wheel primary colors are colors which cannot be created by combining other colors. These are red, yellow, and blue.
-
-#### Secondary Colors
-
-Secondary colors result from mixing two primary colors. In the RGB color wheel, secondary colors are cyan, magenta, and yellow.
-
-In the RYB color wheel the secondary colors are purple, orange, and green.
-
-#### Tertiary Colors
-
-Tertiary colors are created by combining a secondary color with a primary color. There are six tertiary colors.
-
-In the RGB color wheel these are orange, chartreuse green, spring green, azure, violet and rose.
-
-In the RYB color wheel the tertiary colors are red-orange, yellow-orange, yellow-green, blue-green, blue-violet, and red-violet.
+[View the source](http://bit.ly/2TE2aag)
 
 #### Hue
 
 A hue is any color on the color wheel. Variations on this hue are created by establishing a shade, tint, or tone.
 
+![Hue](images/hue.svg)
+
 #### Saturation
 
 Saturation is the intensity or purity of a color.
+
+![Saturation](images/saturation.svg)
 
 #### Luminance
 
 Luminance is the amount of brightness, or light, in a color.
 
-![Hue, saturation, and luminance](https://static-cse.canva.com/_next/static/assets/hue-saturation-luminance.900x530.6e8f16e0e8ae31352c7a0e59f4303e13.png)
+![Luminance](images/luminance.svg)
 
 #### Shade
 
 A shade is created by incorporating black to a base hue, which darkens the color.
 
+![Shade](images/shade.svg)
+
+[View the source](http://bit.ly/2TE2aag)
+
 #### Tint
 
 A tint is created by adding white to a base hue, which lightens the color.
+
+![Tint](images/ting.svg)
+
+[View the source](http://bit.ly/2TE2aag)
 
 #### Tone
 
 A tone is created by combining black or white (gray) with a base hue. Tones are subtle variations of the original color.
 
-![Shade tint and tone](https://static-cse.canva.com/_next/static/assets/shade-tint-tones.900x530.9696016ce712641dfdf5cdabe3edf2c8.png)
+![Tone](images/tone.svg)
+
+[View the source](http://bit.ly/2TE2aag)
 
 ### Color Semantics
 
@@ -239,52 +275,56 @@ Text Color Inverted: #ffffff;
 The piece of a letter which rises above the x-height.
 ![Ascender](https://www.canva.com/learn/wp-content/uploads/2015/07/typography-terms-18-tb-800x0.png)
 
+[View the source](http://bit.ly/2TKGHwr)
+
 #### Descender
 
 The piece of a letter which dips below the baseline.
 ![Descender](https://www.canva.com/learn/wp-content/uploads/2015/07/typography-terms-17-tb-800x0.png)
+
+[View the source](http://bit.ly/2TKGHwr)
 
 #### Baseline
 
 The imaginary line on which most letter characters sit.
 ![Baseline](https://www.canva.com/learn/wp-content/uploads/2015/07/typography-terms-7-tb-800x0.png)
 
+[View the source](http://bit.ly/2TKGHwr)
+
 #### Cap Line
 
 The imaginary line that marks the upper boundary of capital letters and some lowercase letters' ascenders.
 ![Cap line](https://www.canva.com/learn/wp-content/uploads/2015/07/typography-terms-8-tb-800x0.png)
+
+[View the source](http://bit.ly/2TKGHwr)
 
 #### X-Height
 
 Height of the typeface's lowercase letters.
 ![X-height](https://www.canva.com/learn/wp-content/uploads/2015/07/typography-terms-9-tb-800x0.png)
 
+[View the source](http://bit.ly/2TKGHwr)
+
 #### Tracking / Letter Spacing
 
 The uniform amounts of spacing between characters in a complete section of text.
 ![Tracking, letter spacing](https://www.canva.com/learn/wp-content/uploads/2015/07/typography-terms-10-tb-800x0.png)
+
+[View the source](http://bit.ly/2TKGHwr)
 
 #### Kerning
 
 The horizontal spacing between two consecutive characters.
 ![Kerning](https://www.canva.com/learn/wp-content/uploads/2015/07/typography-terms-11-tb-800x0.png)
 
+[View the source](http://bit.ly/2TKGHwr)
+
 #### Leading
 
 The vertical spacing between lines of text (from baseline to baseline).
 ![Leading](https://www.canva.com/learn/wp-content/uploads/2015/07/typography-terms-12-tb-800x0.png)
 
-#### Line Height
-
-The amount of space above and below inline elements.
-
-#### Widow
-
-A paragraph-ending word that falls at the beginning of the following page or column, thus separated from the rest of the text.
-
-#### Orphan
-
-A paragraph-opening line that appears by itself at the bottom of a page or column, thus separated from the rest of the text.
+[View the source](http://bit.ly/2TKGHwr)
 
 ### Types Of Font
 
@@ -308,6 +348,15 @@ Sans-serif fonts include fonts such as:
 - Arial
 - Tahoma
 
+#### Monospaced
+
+Monospaced fonts have letters and characters which occupy the same amount of horizontal space. They were typically used on typewriters.
+
+Monospaced fonts include fonts such as:
+
+- Courier
+- IBM Plex Mono
+
 ### Measurements
 
 There are several types of measurements you can use to build a type scale.
@@ -318,17 +367,17 @@ Most browsers allow a user to set their default font-size to another value than 
 
 However if you set font-sizes in terms of `px`, a heading set at `30px` will remain at `30px` regardless of the base font-size selected by the user.
 
-**REM** is the unit of typography equal to the root font size. 1 rem will be equal to the font size defined in the `html` element.
-
-REM is great for creating robust type scale systems which account for user preference and propagate to HTML elements.
-
-You can calculate pixels from REM by multiplying the REM value by the pixel base.
-
 **Em** is the unit of typography equal to the currently specified point-size. `1em` can compute to different values depending upon where you are in the code.
 
 Ems perform in a similar fashion to REM, until it comes to nesting.
 
 If you have a `div` with a font-size of `2em`, then you nest a `p` with a font-size of `2em`, the font-size of the paragraph is now `2em` relative to the `div`.
+
+**REM** is the unit of typography equal to the root font size. 1 rem will be equal to the font size defined in the `html` element.
+
+REM is great for creating robust type scale systems which account for user preference and propagate to HTML elements.
+
+You can calculate pixels from REM by multiplying the REM value by the pixel base.
 
 ### Type Scale
 
@@ -393,15 +442,15 @@ Select all of the text blocks and set the color to `Text Color Inverted`.
 
 ## Other Areas Of Design
 
-### Grid
+There are several other areas of design which we won't touch on today, but would be included in a fully-built design system.
 
-### Spacing
+Some of these areas include:
 
-### Accessibility
-
-### Icons
-
-### Motion
+- Grid
+- Spacing
+- Accessibility
+- Motion
+- Iconography
 
 ## Resources
 

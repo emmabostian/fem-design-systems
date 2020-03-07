@@ -286,21 +286,19 @@ Once all surveys have been taken, we can average the responses from the adoption
 
 Finally can take this request and plot it within our four-quadrant graph.
 
-This process is complex and comes with overhead, which is why it shouldn't necessarily be carried out for each request. We can use this method if the team comes to a standstill.
+![Four quadrant graph](images/quadrants.svg)
 
-## Sprint Process
+Let's take an example of a button. We already know that buttons require a ton of effort and maintenance, however the benefits are huge. Since buttons are the most widely-used components in web applications we can be sure they will go a long way towards unifying the brand identity of our application.
 
-The process for building a new component in our design system looks like this:
+Let's suppose we've run the surveys and calculated the mean for both adopter and opposer metrics and we get a score of (4,4) on a 5-point axis for buttons.
 
-1. Design
-2. Develop
-3. Test
-4. Document
-5. Deploy
+![Buttons](images/buttons.svg)
 
-When building a system, we must be intentional when choosing a technology stack. We must meet teams where they are today. So if your teams are using Vue.js, don't build a component library using React styled components.
+Now let's take a composite component, like an accordion. Accordions won't provide much benefit to our product as they're used once or maybe twice throughout the product. But they require a lot of effort and maintenance.
 
-This is an iterative process that will be revisited for each component.
+![Accordion](images/accordions.svg)
+
+Given these two components, we can see that we should prioritze our button component above our accordion component because it will provide the most benefit.
 
 ## Checklist
 
@@ -318,7 +316,7 @@ How should a component respond when a user interacts with it? Is there validatio
 
 #### Context
 
-How and where should this component be leveraged? When should I use a link versus a tertiary button, for example?
+How and where should this component be used? When should I use a link versus a tertiary button, for example?
 
 #### Completion
 
@@ -344,7 +342,7 @@ In addition to an accessible color palette, we must develop our components with 
 
 #### Responsiveness
 
-Our components must respond to browser window resizing.
+Our components must respond to browser window resizing and varying screen resolutions.
 
 #### Completion
 
@@ -360,7 +358,7 @@ How do our components respond when something breaks? Have we incorporated type c
 
 #### Browser Compatibility
 
-Do the technologies we use work across all supported browsers or must we employ polyfills?
+Do the technologies we use work across all supported browsers or must we include polyfills?
 
 ## Common Mistakes
 

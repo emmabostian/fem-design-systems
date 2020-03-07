@@ -690,7 +690,7 @@ const Button = styled.button`
   }
 
   &:focus {
-    outline: 3px solid ${props => props.theme.primaryHoverColor};
+    outline: 3px solid ${defaultTheme.primaryHoverColor};
     outline-offset: 2px;
   }
 
@@ -877,7 +877,7 @@ const BUTTON_MODIFIERS = {
 
     &:hover, &:focus {
       background-color: ${defaultTheme.warningColorHover};
-      outline: 3px solid ${props => props.theme.warningColorHover};
+      outline: 3px solid ${defaultTheme.warningColorHover};
       outline-offset: 2px;
     }
 
@@ -886,28 +886,28 @@ const BUTTON_MODIFIERS = {
     }
   `,
   error: () => `
-  background-color: ${defaultTheme.errorColor};
-  color: ${defaultTheme.textColorInverted};
+    background-color: ${defaultTheme.errorColor};
+    color: ${defaultTheme.textColorInverted};
 
-  &:hover {
-    background-color: ${defaultTheme.errorColorHover};
-  }
+    &:hover {
+      background-color: ${defaultTheme.errorColorHover};
+    }
 
-  &:active {
-    background-color: ${defaultTheme.errorColorActive};
-  }
+    &:active {
+      background-color: ${defaultTheme.errorColorActive};
+    }
   `,
   success: () => `
-  background-color: ${defaultTheme.successColor};
-  color: ${defaultTheme.textColorInverted};
+    background-color: ${defaultTheme.successColor};
+    color: ${defaultTheme.textColorInverted};
 
-  &:hover {
-    background-color: ${defaultTheme.successColorHover};
-  }
+    &:hover {
+      background-color: ${defaultTheme.successColorHover};
+    }
 
-  &:active {
-    background-color: ${defaultTheme.successColorActive};
-  }
+    &:active {
+      background-color: ${defaultTheme.successColorActive};
+    }
   `
 };
 ```
@@ -1084,11 +1084,11 @@ const BUTTON_MODIFIERS = {
   `,
   warning: ({ theme }) => `
     background-color: ${theme.warningColor};
-    color: ${props => props.theme.textColorInverted};
+    color: ${theme.textColorInverted};
 
     &:hover, &:focus {
       background-color: ${theme.warningColorHover};
-      outline: 3px solid ${props => props.theme.warningColorHover};
+      outline: 3px solid ${theme.warningColorHover};
       outline-offset: 2px;
     }
 
@@ -1097,28 +1097,28 @@ const BUTTON_MODIFIERS = {
     }
   `,
   error: ({ theme }) => `
-  background-color: ${theme.errorColor};
-  color: ${theme.textColorInverted};
+    background-color: ${theme.errorColor};
+    color: ${theme.textColorInverted};
 
-  &:hover {
-    background-color: ${theme.errorColorHover};
-  }
+    &:hover {
+      background-color: ${theme.errorColorHover};
+    }
 
-  &:active {
-    background-color: ${theme.errorColorActive};
-  }
+    &:active {
+      background-color: ${theme.errorColorActive};
+    }
   `,
   success: ({ theme }) => `
-  background-color: ${theme.successColor};
-  color: ${theme.textColorInverted};
+    background-color: ${theme.successColor};
+    color: ${theme.textColorInverted};
 
-  &:hover {
-    background-color: ${theme.successColorHover};
-  }
+    &:hover {
+      background-color: ${theme.successColorHover};
+    }
 
-  &:active {
-    background-color: ${theme.successColorActive};
-  }
+    &:active {
+      background-color: ${theme.successColorActive};
+    }
   `
 };
 

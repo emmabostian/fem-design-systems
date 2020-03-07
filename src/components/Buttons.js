@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { applyStyleModifiers } from "styled-components-modifiers";
 import { typeScale, primaryFont } from "../utils";
 
@@ -88,6 +89,11 @@ export const PrimaryButton = styled(Button)`
   }
   ${applyStyleModifiers(BUTTON_MODIFIERS)};
 `;
+
+PrimaryButton.propTypes = {
+  /** enable block styling on the button */
+  test: PropTypes.bool
+};
 
 export const SecondaryButton = styled(Button)`
   border: 2px solid ${props => props.theme.primaryColor};

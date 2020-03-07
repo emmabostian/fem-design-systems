@@ -18,396 +18,146 @@ It will also create a `stories/` directory inside of the `src/` folder. If we ex
 
 Run `npm run storybook` to start your development server.
 
-We can delete the `0-Welcome.stories.js` file and rename the `1-Button.stories.js` file to `Button.stories.js`. Let's move this file into the `components/` directory so it's close to it's component. We can then delete the `stories/` folder entirely.
+We can delete the `0-Welcome.stories.js` file and rename the `1-Button.stories.js` file to `Button.stories.mdx`. Let's move this file into the `components/` directory so it's close to it's component. We can then delete the `stories/` folder entirely.
 
 Storybook creates the `stories/` folder initially because it isn't aware of your project architecture. But we're aware of it so let's refactor.
 
-Inside `Button.stories.js` change the content to the following:
+## Creating Stories With MDX
+
+MDX is a format which lets you write JSX in your markdown files, and we can use it to create stories and documentation.
+
+Inside `main.js` change the file extension in the `stories` array to accept either `js` or `mdx`.
+
+```js
+stories: ["../src/**/*.stories.(js|mdx)"],
+```
+
+We can use MDX to document our components and create a style guide for our design system. To do that, we'll need a few additional things, known as add-ons.
+
+## Using Add-ons
+
+Add-ons are neat packages you can install and use with Storybook to gain additional functionality.
+
+Let's add a documentation add-on which will allow us to create beautiful design system documentation.
+
+Run the following command to install the docs add-on.
+
+```
+npm i -D @storybook/addon-docs
+```
+
+We then need to tell Storybook that we'll be using this add-on and we can do that in `main.js`.
+
+Add the following to the `addons` array in `main.js`.
+
+```js
+module.exports = {
+  stories: ["../src/**/*.stories.(js|mdx)"],
+  addons: [
+    ...{
+      name: "@storybook/addon-docs",
+      options: {
+        configureJSX: true
+      }
+    }
+  ]
+};
+```
+
+The configureJSX option is useful when you're writing your docs in MDX and your project's babel config isn't already set up to handle JSX files. Now we can use our documentation add-on.
+
+## Passing Themes
+
+At the moment, Storybook is unaware of our theme, so our components aren't rendering with the correct styling.
+
+To pass the theme prop to our components we have to do a bit of configuration.
+
+In the `.storybook/` directory create a new file called `themeDecorator.js`. Decorators are wrapper components or Storybook decorators that wrap a story.
+
+We'll need `ThemeProvider` from `styled-components` and for now we'll use our `defaultTheme`, which we can import from the `utils/` folder. We'll export a constant called `ThemeDecorator`. `ThemeDecorator` will take a story function as an argument and return a single JSX element, `ThemeProvider`.
+
+`ThemeProvider` takes one prop, the theme (in our case the `defaultTheme`). As a child of the `ThemeProvider` component we'll evaluate the expression `storyFn()`.
+
+```js
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import { defaultTheme } from "../src/utils";
+
+const ThemeDecorator = storyFn => (
+  <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
+);
+
+export default ThemeDecorator;
+```
+
+Now that we have our theme provider, we need to configure it. Create a new file, `config.js` inside of the `.storybook` directory, and add the following.
+
+```js
+import { addDecorator } from "@storybook/react";
+import themeDecorator from "./themeDecorator";
+
+addDecorator(themeDecorator);
+```
+
+Now, all of our components will receive our theme prop, which is currently set to `defaultTheme`.
+
+## Writing The Button Stories
+
+We're finally ready to add some button documentation. Inside `Buttons.stories.mdx`, add the following:
 
 ```jsx
-import React from "react";
+import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
 import {
   PrimaryButton,
   SecondaryButton,
-  TertiaryButton
-} from "../components/Buttons";
+  TertiaryButton,
+  Button
+} from "./Buttons";
 
-export default {
-  title: "Buttons"
-};
+<Meta title="Design System|Buttons" component={PrimaryButton} />
 
-export const Primary = () => <PrimaryButton>Primary Button</PrimaryButton>;
+# Buttons
 
-export const Secondary = () => (
-  <SecondaryButton>Secondary Button</SecondaryButton>
-);
+Buttons are used to trigger actions within an application.
 
-export const Tertiary = () => <TertiaryButton>Tertiary Button</TertiaryButton>;
+## Primary Buttons
+
+Primary buttons are used as a call to action and indicate the most important action on a page.
+
+<Preview withToolbar>
+  <Story name="primary">
+    <PrimaryButton>Hello world</PrimaryButton>
+  </Story>
+</Preview>
+
+## Secondary Buttons
+
+Primary buttons are used as a call to action and indicate the most important action on a page.
+
+<Story name="secondary">
+  <SecondaryButton>Hello world</SecondaryButton>
+</Story>
+
+## Teriary Buttons
+
+Primary buttons are used as a call to action and indicate the most important action on a page.
+
+<Story name="tertiary">
+  <TertiaryButton>Hello world</TertiaryButton>
+</Story>
 ```
 
-If you go back to the UI we can see it's rendering a button but it isn't styled appropriately.
+Now if we restart our Storybook server, we should see our buttons rendering in the UI. We also have a Docs tab which houses all of our documentation.
 
-This is because our buttons rely on a theme prop to be passed with `ThemeProvider`.
+![Buttons Storybook](images/buttons-storybook.png)
 
-![Storybook](images/storybook.png)
+## Knobs
 
-## Adding Decorators
+## Accessibility
 
-We'll add our decorators to a new file, `manager.js` inside of `.storybook/` so each of our components inherits these decorators instead of having to manually include them in each component story.
+## Modal Activity
 
-Create `manager.js` and add the following:
-
-```js
-import { addons } from "@storybook/addons";
-import { ThemeProvider } from "styled-components";
-import { defaultTheme } from "../src/utils/";
-
-addons.setConfig({
-  decorators: [
-    storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
-  ]
-});
-```
-
-Now if we go back to our components, they should be rendering correctly.
-
-## Passing Themes To Storybook Components
-
-Inside `Button.stories.js` let's import a few additional things.
-
-```jsx
-import React, { useContext } from "react";
-import { ThemeContext } from "styled-components";
-```
-
-We need to declare our `Theme` component which will wrap our buttons. This will use the `useContext` hook from React.
-
-```js
-const Theme = ({ children }) => {
-  useContext(ThemeContext);
-  return children;
-};
-```
-
-Underneath the `Theme` variable declaration, let's create a default export for this component which denotes the component title.
-
-```jsx
-export default {
-  title: "Buttons"
-};
-```
-
-Now we can simply export individual stories for each button.
-
-```jsx
-export const Primary = () => (
-  <Theme>
-    <PrimaryButton>Primary button</PrimaryButton>
-  </Theme>
-);
-
-export const Secondary = () => (
-  <Theme>
-    <SecondaryButton>Secondary button</SecondaryButton>
-  </Theme>
-);
-
-export const Tertiary = () => (
-  <Theme>
-    <TertiaryButton>Tertiary button</TertiaryButton>
-  </Theme>
-);
-```
-
-Your UI should still be working as expected.
-
-## Addons
-
-Addons are neat packages you can install and use with Storybook to gain additional functionality.
-
-### Actions
-
-We can also use the `action` function from `storybook/addon-actions` to dispatch actions when our button is clicked. This will simply log the event in the Storybook console.
-
-Make sure `addon-actions` is installed (`npm i -D @storybook/addon-actions`) and added to our `addons` array in `main.js`.
-
-```js
-module.exports = {
-  stories: ["../src/**/*.stories.js"],
-  addons: ["@storybook/preset-create-react-app", "@storybook/addon-actions"]
-};
-```
-
-First import `action` addon to `Button.stories.js`.
-
-```js
-import { action } from "@storybook/addon-actions";
-```
-
-Then we can include it inside of an `onClick` handler.
-
-```jsx
-export const Primary = () => (
-  <Theme>
-    <PrimaryButton onClick={action("click")}>Primary button</PrimaryButton>
-  </Theme>
-);
-```
-
-### Theme Switcher
-
-To switch the theme of our components we can use the `addon-contexts` add on.
-
-First install the add on with `npm`.
-
-```
-npm i -D @storybook/addon-contexts
-```
-
-Then add it to the array of addons in `main.js`.
-
-```js
-module.exports = {
-  stories: ["../src/**/*.stories.js"],
-  addons: [..."@storybook/addon-contexts"]
-};
-```
-
-### Code Snippets
-
-Often you want to see the code snippets documented with your components. We can use the `story source` add-on to do this.
-
-First add the add-on as a development dependency with `npm`.
-
-```jsx
-npm i -D  @storybook/addon-storysource
-```
-
-Next, add it to the `main.js` file in the `addons` array.
-
-```jsx
-"@storybook/addon-storysource";
-```
-
-You should now see code in your UI!
-
-### Knobs
-
-Knobs are a great add-on for testing all combinations of your components.
-
-Simply install the add-on.
-
-```jsx
-npm i -D @storybook/addon-knobs
-```
-
-And add it to your `addons` array in `main.js`.
-
-```js
-"@storybook/addon-knobs";
-```
-
-We want to create knobs, or select drop downs, which allow us to choose our button size and status color as well as toggle the disabled state.
-
-Inside `Button.stories.js` import the following.
-
-```jsx
-import { withKnobs, select, boolean } from "@storybook/addon-knobs";
-```
-
-Next, add `withKnobs` to the `decorators` array.
-
-```jsx
-export default {
-  title: "Buttons",
-  decorators: [
-    storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>,
-    withKnobs
-  ]
-};
-```
-
-First let's create our default primary button which will show the primary button in its natural state. We'll give it a bottom margin so it doesn't collide with the elements below it.
-
-Inside the `PrimaryButton` story add the following.
-
-```jsx
-<Theme>
-  <p style={{ fontFamily: "Arial" }}>Default primary button</p>
-  <PrimaryButton style={{ marginBottom: "50px" }} onClick={action("clicked")}>
-    Primary button
-  </PrimaryButton>
-  <br />
-</Theme>
-```
-
-Now let's create another primary button which will accept our modifiers.
-
-There will be two items in our `modifiers` array: two select boxes with size and status. Size will contain `small` and `large` as values and status will contain `warning`, `error`, and `success`.
-
-Then we can add the `disabled` state and set it to a `boolean` initialized to `false`.
-
-```jsx
-<Theme>
-  <p style={{ fontFamily: "Arial" }}>Primary button with modifiers</p>
-  <PrimaryButton
-    modifiers={[
-      select("Size", ["small", "large"]),
-      select("Status", ["warning", "error", "success"])
-    ]}
-    disabled={boolean("Disabled", false)}
-    onClick={action("clicked")}
-  >
-    Primary button
-  </PrimaryButton>
-</Theme>
-```
-
-Now when you change the knobs, the second primary button should change to reflect it.
-
-![Knobs](images/storybook-modifiers.png)
-
-### Accessibility
-
-Now let's add an accessibility add-on. First add the package dependency.
-
-```jsx
-npm i -D @storybook/addon-a11y
-```
-
-Then add the add-on to the add-on array in `main.js`.
-
-```jsx
-module.exports = {
-  stories: ["../src/**/*.stories.js"],
-  addons: [
-    "@storybook/preset-create-react-app",
-    "@storybook/addon-actions",
-    "@storybook/addon-links",
-    "@storybook/addon-storysource",
-    "@storybook/addon-knobs",
-    "@storybook/addon-a11y/register"
-  ]
-};
-```
-
-Inside `Button.stories.js` import the accessibility add-on.
-
-```jsx
-import { withA11y } from "@storybook/addon-a11y";
-```
-
-And add it to the decorators array.
-
-```jsx
-export default {
-  title: "Buttons",
-  decorators: [
-    storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>,
-    withKnobs,
-    withA11y
-  ]
-};
-```
-
-And now you can see the accessibility panel appear in Storybook.
-
-![Accessibility](images/a11y.png)
-
-## Activity
-
-Now it's your turn. Go ahead and add stories for your secondary and tertiary buttons as well as your modal.
-
-Storybook is a great way to find bugs in your corner-cases! If you find any bugs in your CSS, go ahead and fix them!
-
-### Activity Solution
-
-```jsx
-export const Secondary = () => (
-  <Theme>
-    <p style={{ fontFamily: "Arial" }}>Default secondary button</p>
-    <SecondaryButton
-      style={{ marginBottom: "50px" }}
-      onClick={action("clicked")}
-    >
-      Secondary button
-    </SecondaryButton>
-    <br />
-    <p style={{ fontFamily: "Arial" }}>Secondary button with modifiers</p>
-    <SecondaryButton
-      modifiers={[
-        select("Size", ["small", "large"]),
-        select("Status", ["warning", "error", "success"])
-      ]}
-      disabled={boolean("Disabled", false)}
-      onClick={action("clicked")}
-    >
-      Secondary button
-    </SecondaryButton>
-  </Theme>
-);
-
-export const Tertiary = () => (
-  <Theme>
-    <p style={{ fontFamily: "Arial" }}>Default tertiary button</p>
-    <TertiaryButton
-      style={{ marginBottom: "50px" }}
-      onClick={action("clicked")}
-    >
-      Tertiary button
-    </TertiaryButton>
-    <br />
-    <p style={{ fontFamily: "Arial" }}>Tertiary button with modifiers</p>
-    <TertiaryButton
-      modifiers={[
-        select("Size", ["small", "large"]),
-        select("Status", ["warning", "error", "success"])
-      ]}
-      disabled={boolean("Disabled", false)}
-      onClick={action("clicked")}
-    >
-      Tertiary button
-    </TertiaryButton>
-  </Theme>
-);
-```
-
-For the modals don't forget to pass state!
-
-```jsx
-import React, { useContext } from "react";
-import { withKnobs } from "@storybook/addon-knobs";
-import { withA11y } from "@storybook/addon-a11y";
-import { SignInModal, SignUpModal } from "../components/";
-import { ThemeProvider, ThemeContext } from "styled-components";
-import { defaultTheme } from "../utils";
-
-const Theme = ({ children }) => {
-  useContext(ThemeContext);
-  return children;
-};
-
-export default {
-  title: "Modals",
-  decorators: [
-    storyFn => <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>,
-    withKnobs,
-    withA11y
-  ]
-};
-
-export const SignUp = () => (
-  <Theme>
-    <SignUpModal showModal={true} setShowModal={null} />
-  </Theme>
-);
-
-export const SignIn = () => (
-  <Theme>
-    <SignInModal showModal={true} setShowModal={null} />
-  </Theme>
-);
-```
+## Theme toggling
 
 ## Customizing Storybook
 

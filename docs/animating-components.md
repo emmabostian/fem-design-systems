@@ -66,43 +66,27 @@ Facebook’s like button is a prime example of this, as is Instagram’s heart a
 
 Micro-interactions can bring joy to our users by enhancing their experience. They can take even the most tedious of forms and bring them to life.
 
-## Do's & Don'ts Of Micro-Interactions
+## Tips for creating micro-interactions
 
-Before you build your first micro-interaction, it’s important to understand the do’s and don’ts.
+Before you build your first micro-interaction, here are a few tips
 
-### Do: Make Your Micro-Interactions Accessible
+### Accessibility
 
 Users won’t care about the coolest micro-interaction in the world if it’s not accessible. If the interaction indicates state change, ensure that the proper HTML elements and attributes are used; otherwise, add the appropriate WAI-ARIA counterparts.
 
-### Don't: Add Animation To Everything
+### Intentionality
 
 Animations draw the user’s attention, but not all information has the same level of importance.
 
 First understand which component on the page has the most pertinent or time sensitive information or priority, and then decide what to animate.
 
-### Do: Make Animations Feel As Though They're Part Of The Real World
+### Relatability
 
 Our goal is to create animations which feel natural and fluid, not robotic and linear. Try to mimic the physics of the real world when designing and developing micro-interactions.
 
-## Building A Micro-Interaction
+### Performance
 
-There are three main areas to designing a micro-interaction:
-
-1. Interaction Trigger
-2. State Definition
-3. Animation Definition
-
-### Interaction Trigger
-
-All micro-interactions require something else to trigger them. This can be a user-triggered action, like clicking a button, or a system-prompted event, like requesting data.
-
-### State Definition
-
-Once we know what triggers the micro-interaction, we must define the different state that this micro-interaction has.
-
-### Animation Definition
-
-Once we’ve defined the various states, we can define what is expected at each step.
+Never make your users wait for an animation to complete if their page or data is ready.
 
 ## React Spring
 

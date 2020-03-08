@@ -67,7 +67,7 @@ So... why is pure CSS problematic?
 
 The ability to include styling in so many ways (inline, in the document head, and in external CSS files) causes our styling to be de-centralized and difficult to maintain. De-centralized CSS makes it difficult to remove old CSS when a component is removed and this can lead to dead code bloating your package size.
 
-Additionally, a lack of knowledge about CSS specificity leades developers to add `!important` notations to many styles, which leads to unmaintainable styling. This also leads to bleeding styles.
+Additionally, a lack of knowledge about CSS specificity leads developers to add `!important` notations to many styles, which leads to unmaintainable styling. This also leads to bleeding styles.
 
 For example, if I want to color all list items in my "Shopping cart" component blue, I might write the following CSS inside of `shopping-cart.css`:
 
@@ -163,35 +163,13 @@ We're going to build our components using [create-react-app](https://github.com/
 
 **I wouldn't condone using `create-react-app` under normal circumstances if you're building an enterprise design system; this tool is great for building React _applications_ but not for creating component libraries.**
 
-So then, you might ask, why are we using it today?
-
-Well, my friends, building a component library is not cut-and-dry. It requires a lot of setup and knowledge about how to build a component library while being able to observe and test the changes in real-time.
-
-We have a few options when it comes to building components and observing them in real-time.
-
-### Write our code, build our package, publish to the npm registry, install our package in a React application, and see if it works.
-
-This option isn't optimal as it doesn't allow us to view our components as we're building them.
-
-### Create a mono repository, a project where many projects or packages are stored in the same repo.
-
-This would require taking the time to set up [Yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) and [Lerna](https://github.com/lerna/lerna).
-
-**This is the architecture you might want if you are building a component library within a company (especially if you have multiple products using the same system). It is the most robust solution and easily manageable. It also has several benefits including smart dependency management (it will only install one version of an npm package even if used in all containing repos).**
-
-Unfortunately I _don't_ have experience with either of these technologies and would consume a lot of time trying to troubleshoot and set up.
+I wanted to focus on the content and not on the deployment and build processes.
 
 There was a library I attempted, and hoped, to use for this workshop called `create-react-library`, which you can check out [here](https://www.npmjs.com/package/create-react-library), but unfortunately getting it to work with styled components was a hassle and many of the dependent packages were sorely deprecated.
 
 If they update this library to use the newest version of React, this is the solution I would opt for!
 
 If there's a future version of this workshop, I would love to include the setup of a monorepo, but I simply didn't have time!
-
-### Use `create-react-app` to build and test our components.
-
-I recognize that this option is not ideal, and learning how to publish our component library today would be extremely valuable but due to the time constraint and my lack of knowledge in this area, as well as each company having individualized build and deployment processes, I opted to keep this part out of the workshop.
-
-This will allow us to focus on the content and not on the process.
 
 ## Editor Settings
 

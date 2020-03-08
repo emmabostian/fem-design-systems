@@ -220,11 +220,9 @@ CYMK is the subtractive color mixing model used in print design.
 
 Head over to Figma and create a new project.
 
-Click the new page button on the left sidebar (plus icon) and name it "Colors".
+I've created a starter file for you to use, and you can get that [here](https://www.figma.com/file/FUgY11amAHtmR2zyiHcSYs/FEM-Template?node-id=1%3A127)
 
-Press 'A' to add a new art board and select any one of the art board sizes.
-
-Name the art board 'Color Palette'.
+Copy and paste over the existing artboards from the starter file into the respective tabs on your new project.
 
 Now head over to [Canva Color Palettes](https://www.canva.com/colors/color-palettes/) or [Coolors](https://coolors.co/browser/latest/1) and select a monochromatic color palette to use.
 
@@ -395,9 +393,9 @@ There are several scales to choose from when building an application. Here are s
 
 ### Creating A Type Scale In Figma
 
-Let's head back to our Figma project and create a new page called Typography.
+In your Figma project, head to the Typography tab and use the provided artboards as a template.
 
-Press 'A' to add a new art board and name it 'Type Scale'.
+You should pick a font family and a typescale.
 
 Head to the [Google fonts website](https://fonts.google.com/) and find a font family for your design system.
 

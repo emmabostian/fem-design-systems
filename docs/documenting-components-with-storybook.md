@@ -106,7 +106,7 @@ Now, all of our components will receive our theme prop, which is currently set t
 We're finally ready to add some button documentation. Inside `Buttons.stories.mdx`, add the following:
 
 ```jsx
-import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
 import {
   PrimaryButton,
   SecondaryButton,
@@ -119,6 +119,10 @@ import {
 # Buttons
 
 Buttons are used to trigger actions within an application.
+
+## Usage
+
+Buttons are used to trigger internal actions within your web applications.
 
 ## Primary Buttons
 
@@ -151,9 +155,130 @@ Now if we restart our Storybook server, we should see our buttons rendering in t
 
 ![Buttons Storybook](images/buttons-storybook.png)
 
+## Actions
+
+We can use the `addon-actions` add-on to trigger actions on our form components, like our buttons.
+
+First install the add-on then add it to the `addons` array in `main.js.`
+
+```
+npm i -D @storybook/addon-actions
+```
+
+```js
+module.exports = {
+  stories: ["../src/**/*.stories.(js|mdx)"],
+  addons: [
+    ...
+    "@storybook/addon-actions",
+};
+```
+
+We can now import `action` and trigger it on our buttons. Inside `Button.stories.js` import `action` and add it as a `onClick` handler on the `PrimaryButton` component.
+
+```js
+import { action } from '@storybook/addon-actions';
+
+...
+
+<Preview withToolbar>
+  <Story name="primary">
+    <PrimaryButton onClick={action('button-click')} disabled={boolean("Disabled", false)}>Hello world</PrimaryButton>
+  </Story>
+</Preview>
+```
+
+Now if we head back to the Storybook UI and click our primary button we should see an action being fired in the Actions tab panel.
+
+![Actions](images/action.png)
+
 ## Knobs
 
+Storybook has an add-on called knobs which allows you to interact with your components and change their proprerties in real-time.
+
+First let's install knobs with the following command.
+
+```
+npm i -D @storybook/addon-knobs
+```
+
+Next we have to add the add-on to the Storybook configuration in `main.js.`
+
+```js
+module.exports = {
+  stories: ["../src/**/*.stories.(js|mdx)"],
+  addons: [
+    ...
+    "@storybook/addon-knobs",
+    ...
+  ]
+};
+```
+
+We also need to tell Storybook to use `withKnobs` as a decorator. Inside `config.js`, import `withKnobs` and add it as a decorator.
+
+```js
+import { withKnobs } from "@storybook/addon-knobs";
+
+...
+
+addDecorator(withKnobs);
+```
+
+Let's add a knob for setting the disabled state of our buttons. Inside `Button.stories.mdx` import the following.
+
+```js
+import { withKnobs, boolean } from "@storybook/addon-knobs";
+```
+
+Then we can add the `disabled` attribute to our button using the `boolean` value we just imported.
+
+```js
+<Preview withToolbar>
+  <Story name="primary">
+    <PrimaryButton disabled={boolean("Disabled", false)}>
+      Hello world
+    </PrimaryButton>
+  </Story>
+</Preview>
+```
+
+If you head back to your UI, under the canvas tab, you should see a knob at the bottom with a checkbox discerning the disabled state. If you click it, it should disable the button.
+
+Let's add this to the secondary and tertiary buttons.
+
 ## Accessibility
+
+We can use the `storybook-addon-a11y` add-on to test the accessibility of our components.
+
+First let's install the add-on, and then add it to the addons array in `main.js`.
+
+```
+npm i -D @storybook/addon-a11y
+```
+
+```js
+module.exports = {
+  stories: ["../src/**/*.stories.(js|mdx)"],
+  addons: [
+    ...
+    "@storybook/addon-a11y/register",
+    ...
+  ]
+};
+```
+
+Just like the knobs add-on, we have to add `withA11y` as a decorator. Back in `config.js` let's import `withA11y` and use `addDecorator` to add it.
+
+```js
+...
+import { withA11y } from "@storybook/addon-a11y";
+
+...
+addDecorator(withA11y);
+```
+
+If you head back to the Storybook UI and click the canvas tab, you should see "Accessibility" as a bottom tab panel. This will now show you your passing and failing accessibility tests.
 
 ## Modal Activity
 

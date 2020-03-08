@@ -71,6 +71,8 @@ However, if you do choose to forgo the label, be sure to include an `aria-label`
 
 ![Icon buttons](images/icon-buttons.png)
 
+## Button Styles
+
 ### Border Radius
 
 You may choose to have a button with 90 degree squared edges, a partial border-radius, or a full border-radius and it will impact your brand identity.

@@ -72,34 +72,69 @@ At the moment, Storybook is unaware of our theme, so our components aren't rende
 
 To pass the theme prop to our components we have to do a bit of configuration.
 
-In the `.storybook/` directory create a new file called `themeDecorator.js`. Decorators are wrapper components or Storybook decorators that wrap a story.
+First install two add-ons: background and contexts.
 
-We'll need `ThemeProvider` from `styled-components` and for now we'll use our `defaultTheme`, which we can import from the `utils/` folder. We'll export a constant called `ThemeDecorator`. `ThemeDecorator` will take a story function as an argument and return a single JSX element, `ThemeProvider`.
+```
+npm i -D @storybook/addon-backgrounds @storybook/addon-contexts
+```
 
-`ThemeProvider` takes one prop, the theme (in our case the `defaultTheme`). As a child of the `ThemeProvider` component we'll evaluate the expression `storyFn()`.
+Next, add the two add-ons to the addons array in `main.js`.
 
 ```js
-import React from "react";
+module.exports = {
+  stories: ["../src/**/*.stories.(js|mdx)"],
+  addons: [
+    "@storybook/preset-create-react-app",
+    "@storybook/addon-contexts/register",
+    "@storybook/addon-backgrounds/register"
+  ]
+};
+```
+
+Now let's create a new file, `contexts.js` inside of the `.storybook` directory and add the following.
+
+```js
 import { ThemeProvider } from "styled-components";
-import { defaultTheme } from "../src/utils";
+import { defaultTheme, darkTheme } from "../src/utils";
 
-const ThemeDecorator = storyFn => (
-  <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
-);
-
-export default ThemeDecorator;
+export const contexts = [
+  {
+    icon: "box", // a icon displayed in the Storybook toolbar to control contextual props
+    title: "Themes", // an unique name of a contextual environment
+    components: [ThemeProvider],
+    params: [
+      // an array of params contains a set of predefined `props` for `components`
+      { name: "Default Theme", props: { theme: defaultTheme, default: true } },
+      { name: "Dark Theme", props: { theme: darkTheme } }
+    ],
+    options: {
+      deep: true, // pass the `props` deeply into all wrapping components
+      disable: false, // disable this contextual environment completely
+      cancelable: false // allow this contextual environment to be opt-out optionally in toolbar
+    }
+  }
+];
 ```
 
-Now that we have our theme provider, we need to configure it. Create a new file, `config.js` inside of the `.storybook` directory, and add the following.
+Now that we have our context, our themes, we have to tell Storybook about it. Create a new file inside of the `.storybook` directory called `preview.js`.
 
 ```js
+import { addParameters } from "@storybook/react";
 import { addDecorator } from "@storybook/react";
-import themeDecorator from "./themeDecorator";
+import { withContexts } from "@storybook/addon-contexts/react";
+import { contexts } from "./contexts";
 
-addDecorator(themeDecorator);
+addParameters({
+  backgrounds: [
+    { name: "Default theme", value: "#ffffff", default: true },
+    { name: "Dark theme", value: "#050449" }
+  ]
+});
+
+addDecorator(withContexts(contexts));
 ```
 
-Now, all of our components will receive our theme prop, which is currently set to `defaultTheme`.
+Now your themes should be working!
 
 ## Writing The Button Stories
 

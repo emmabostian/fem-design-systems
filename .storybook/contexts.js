@@ -5,10 +5,7 @@ export const contexts = [
   {
     icon: "box", // a icon displayed in the Storybook toolbar to control contextual props
     title: "Themes", // an unique name of a contextual environment
-    components: [
-      // an array of components that is going to be injected to wrap stories
-      ThemeProvider
-    ],
+    components: [ThemeProvider],
     params: [
       // an array of params contains a set of predefined `props` for `components`
       { name: "Default Theme", props: { theme: defaultTheme, default: true } },

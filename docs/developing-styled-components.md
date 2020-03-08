@@ -1379,6 +1379,8 @@ import { SignUpModal } from "./components";
 
 Now build your second Figma modal which you designed in the last chapter.
 
+For the text fields, you can grab the code in the [course GitHub repository](https://github.com/emmabostian/fem-design-systems/blob/master/src/components/TextFields.js).
+
 ## Modal Activity Solution
 
 I first downloaded my Sign In illustration as an SVG and added to the `assets/illustrations` folder. Because it's a simple SVG file we don't have to add it to the exports in `index.js`.

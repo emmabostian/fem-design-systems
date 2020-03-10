@@ -11,6 +11,7 @@ const ModalWrapper = styled.div`
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background-color: ${props => props.theme.formElementBackground};
   color: ${props => props.theme.textOnFormElementBackground};
+  font-family: ${typeScale.primaryFont};
   display: flex;
   flex-direction: column;
   justify-content: center;

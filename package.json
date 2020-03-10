@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "polished": "^3.4.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -38,15 +35,15 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^5.3.13",
-    "@storybook/addon-actions": "^5.3.13",
+    "@storybook/addon-a11y": "^5.3.14",
+    "@storybook/addon-actions": "^5.3.14",
     "@storybook/addon-backgrounds": "^5.3.14",
     "@storybook/addon-contexts": "^5.3.14",
     "@storybook/addon-docs": "^5.3.14",
     "@storybook/addon-knobs": "^5.3.14",
-    "@storybook/addon-links": "^5.3.13",
-    "@storybook/addons": "^5.3.13",
-    "@storybook/preset-create-react-app": "^1.5.2",
-    "@storybook/react": "^5.3.13"
+    "@storybook/addon-links": "^5.3.14",
+    "@storybook/addons": "^5.3.14",
+    "@storybook/preset-create-react-app": "^2.0.0",
+    "@storybook/react": "^5.3.14"
   }
 }

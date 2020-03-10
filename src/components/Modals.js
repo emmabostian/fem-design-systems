@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { PrimaryButton, SecondaryButton } from "./Buttons";
 import { EmailInput, PasswordInput } from "./TextFields";
 import { Illustrations, CloseIcon } from "../assets";
-import { typeScale } from "../utils";
+import { typeScale, primaryFont } from "../utils";
 
 const ModalWrapper = styled.div`
   width: 800px;
@@ -11,7 +11,7 @@ const ModalWrapper = styled.div`
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background-color: ${props => props.theme.formElementBackground};
   color: ${props => props.theme.textOnFormElementBackground};
-  font-family: ${typeScale.primaryFont};
+  font-family: ${primaryFont};
   display: flex;
   flex-direction: column;
   justify-content: center;

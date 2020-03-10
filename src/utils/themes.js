@@ -13,17 +13,19 @@ export const defaultTheme = {
   primaryFont: primaryFont,
   disabled: neutral[400],
   textOnDisabled: neutral[300],
-  warningColor: yellow[100],
-  warningColorHover: yellow[200],
-  warningColorActive: yellow[300],
-  errorColor: red[100],
-  errorColorHover: red[200],
-  errorColorActive: red[300],
-  successColor: green[100],
-  successColorHover: green[200],
-  successColorActive: green[300],
   textFieldBackground: neutral[200],
-  textFieldLabelColor: neutral[500]
+  textFieldLabelColor: neutral[500],
+  status: {
+    warningColor: yellow[100],
+    warningColorHover: yellow[200],
+    warningColorActive: yellow[300],
+    errorColor: red[100],
+    errorColorHover: red[200],
+    errorColorActive: red[300],
+    successColor: green[100],
+    successColorHover: green[200],
+    successColorActive: green[300]
+  }
 };
 
 export const darkTheme = {
@@ -38,15 +40,17 @@ export const darkTheme = {
   primaryFont: primaryFont,
   disabled: neutral[400],
   textOnDisabled: neutral[300],
-  warningColor: yellow[100],
-  warningColorHover: yellow[200],
-  warningColorActive: yellow[300],
-  errorColor: red[100],
-  errorColorHover: red[200],
-  errorColorActive: red[300],
-  successColor: green[100],
-  successColorHover: green[200],
-  successColorActive: green[300],
   textFieldBackground: neutral[200],
-  textFieldLabelColor: neutral[100]
+  textFieldLabelColor: neutral[100],
+  status: {
+    warningColor: yellow[100],
+    warningColorHover: yellow[200],
+    warningColorActive: yellow[300],
+    errorColor: red[100],
+    errorColorHover: red[200],
+    errorColorActive: red[300],
+    successColor: green[100],
+    successColorHover: green[200],
+    successColorActive: green[300]
+  }
 };

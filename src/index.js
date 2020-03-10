@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components";
-import { defaultTheme, darkTheme } from "./utils";
-import GlobalStyle from "./utils/Global";
+import { GlobalStyle, defaultTheme, darkTheme } from "./utils";
 import { SignUpModal, PrimaryButton } from "./components";
 
 const App = () => {
@@ -10,18 +9,18 @@ const App = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
-      <PrimaryButton
-        style={{ margin: "0 16px" }}
+      <button
+        style={{ margin: "0 16px 24px", padding: "8px", background: "none" }}
         onClick={() => setUseDarkTheme(true)}
       >
         Dark theme
-      </PrimaryButton>
-      <PrimaryButton
-        style={{ margin: "0 16px" }}
+      </button>
+      <button
+        style={{ margin: "0 16px 24px", padding: "8px", background: "none" }}
         onClick={() => setUseDarkTheme(false)}
       >
         Default theme
-      </PrimaryButton>
+      </button>
       <PrimaryButton
         style={{ margin: "0 16px" }}
         onClick={() => setShowModal(!showModal)}

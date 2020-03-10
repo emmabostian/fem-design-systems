@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { primaryFont } from "./typography";
 import { normalize } from "polished";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 ${normalize()}
 html {
   box-sizing: border-box;
@@ -24,4 +24,3 @@ main {
   margin: 0 auto;
 }
 `;
-export default GlobalStyle;

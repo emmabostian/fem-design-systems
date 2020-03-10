@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { applyStyleModifiers } from "styled-components-modifiers";
 import { typeScale, primaryFont } from "../utils";
 
 export const BUTTON_MODIFIERS = {
   small: () => `
-  padding: 8px 8px;
+  padding: 8px;
   font-size: ${typeScale.helperText};
   `,
   large: () => `
@@ -13,39 +12,39 @@ export const BUTTON_MODIFIERS = {
   font-size: ${typeScale.header5};
   `,
   warning: ({ theme }) => `
-    background-color: ${theme.warningColor};
+    background-color: ${theme.status.warningColor};
     color: ${theme.textColorInverted};
 
     &:hover, &:focus {
-      background-color: ${theme.warningColorHover};
+      background-color: ${theme.status.warningColorHover};
     }
 
     &:active {
-      background-color: ${theme.warningColorActive};
+      background-color: ${theme.status.warningColorActive};
     }
   `,
   error: ({ theme }) => `
-  background-color: ${theme.errorColor};
+  background-color: ${theme.status.errorColor};
   color: ${theme.textColorInverted};
 
   &:hover {
-    background-color: ${theme.errorColorHover};
+    background-color: ${theme.status.errorColorHover};
   }
 
   &:active {
-    background-color: ${theme.errorColorActive};
+    background-color: ${theme.status.errorColorActive};
   }
   `,
   success: ({ theme }) => `
-  background-color: ${theme.successColor};
+  background-color: ${theme.status.successColor};
   color: ${theme.textColorInverted};
 
   &:hover {
-    background-color: ${theme.successColorHover};
+    background-color: ${theme.status.successColorHover};
   }
 
   &:active {
-    background-color: ${theme.successColorActive};
+    background-color: ${theme.status.successColorActive};
   }
   `
 };
@@ -57,8 +56,7 @@ export const Button = styled.button`
   cursor: pointer;
   font-family: ${primaryFont};
   font-size: ${typeScale.paragraph};
-  transition: background-color 0.2s linear, color 0.2s linear,
-    border 0.2s linear;
+  transition: background-color 0.2s linear, color 0.2s linear;
 
   &:hover {
     background-color: ${props => props.theme.primaryHoverColor};
@@ -89,11 +87,6 @@ export const PrimaryButton = styled(Button)`
   }
   ${applyStyleModifiers(BUTTON_MODIFIERS)};
 `;
-
-PrimaryButton.propTypes = {
-  /** enable block styling on the button */
-  test: PropTypes.bool
-};
 
 export const SecondaryButton = styled(Button)`
   border: 2px solid ${props => props.theme.primaryColor};

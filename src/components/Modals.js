@@ -2,11 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { animated, useSpring } from "react-spring";
 import { typeScale, primaryFont } from "../utils";
-import { CloseIcon } from "../assets";
+import { Illustrations, CloseIcon } from "../assets";
 import { PrimaryButton, SecondaryButton } from "./Buttons";
 import { EmailInput, PasswordInput } from "./TextFields";
-import SignIn from "../assets/illustrations/SignIn.svg";
-import SignUp from "../assets/illustrations/SignUp.svg";
 
 const getAnimation = showModal => {
   return {
@@ -28,6 +26,11 @@ const ModalWrapper = styled.div`
   align-items: center;
   position: relative;
   border-radius: 2px;
+`;
+
+const ColumnModalWrapper = styled(ModalWrapper)`
+  flex-direction: row;
+  justify-content: space-around;
 `;
 
 const ModalHeader = styled.h3`
@@ -56,7 +59,7 @@ export const SignUpModal = ({ showModal, setShowModal }) => {
   return (
     <animated.div style={useSpring(getAnimation(showModal))}>
       <ModalWrapper>
-        <img src={SignUp} alt="Sign up for an account!" />
+        <img src={Illustrations.SignUp} alt="Sign up for an account!" />
         <ModalHeader>Sign Up</ModalHeader>
         <SignUpText>
           Sign up today to get access to all of our content and features!
@@ -64,7 +67,10 @@ export const SignUpModal = ({ showModal, setShowModal }) => {
         <PrimaryButton onClick={() => console.log("You signed up!")}>
           Sign Up
         </PrimaryButton>
-        <CloseModalButton onClick={() => setShowModal(false)}>
+        <CloseModalButton
+          aria-label="Close modal"
+          onClick={() => setShowModal(false)}
+        >
           <CloseIcon />
         </CloseModalButton>
       </ModalWrapper>
@@ -74,13 +80,7 @@ export const SignUpModal = ({ showModal, setShowModal }) => {
 
 export const SignInModal = ({ showModal, setShowModal }) => (
   <animated.div style={useSpring(getAnimation(showModal))}>
-    <ModalWrapper
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around"
-      }}
-    >
+    <ColumnModalWrapper>
       <div>
         <ModalHeader>Sign In</ModalHeader>
         <EmailInput label="Email" placeholder="emmabostian@gmail.com" />
@@ -90,10 +90,13 @@ export const SignInModal = ({ showModal, setShowModal }) => (
         </SecondaryButton>
         <PrimaryButton>Sign In</PrimaryButton>
       </div>
-      <img src={SignIn} alt="Sign in to your account" />
-      <CloseModalButton onClick={() => setShowModal(false)}>
+      <img src={Illustrations.SignIn} alt="Sign in to your account" />
+      <CloseModalButton
+        aria-label="Close modal"
+        onClick={() => setShowModal(false)}
+      >
         <CloseIcon />
       </CloseModalButton>
-    </ModalWrapper>
+    </ColumnModalWrapper>
   </animated.div>
 );
